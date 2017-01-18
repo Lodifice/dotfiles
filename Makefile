@@ -1,4 +1,5 @@
-FILES = $(filter-out .git, $(wildcard .*))
+IGNORE = .git
+FILES = $(filter-out $(IGNORE), $(wildcard .*))
 LINKS = $(FILES:%=~/%)
 
 BUNDLEDIR = .vim/bundle
