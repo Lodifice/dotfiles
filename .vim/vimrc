@@ -24,6 +24,9 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'michalbachowski/vim-wombat256mod'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-endwise'
+Plugin 'lodifice/pathfinder.vim'
+Plugin 'lodifice/guillotine.vim'
+Plugin 'lodifice/omnitags.vim'
 " }}}2
 call vundle#end()
 " }}}1
@@ -49,20 +52,34 @@ set incsearch       " search incrementally
 set ignorecase      " ignore case when searching
 set smartcase       " ignore ignorecase when uppercase letter in search string
 " }}}2
-" History & undo levels
+" History & undo levels {{{2
 set history=777     " command line history
 set undolevels=777  " normal mode history
+" }}}2
+" Buffer management {{{2
+set hidden          " Make it possible to switch buffers without writing
+" }}}2
 " }}}1
 
 " Visuals {{{1
-" Line numbers {{{2
-set number
-set relativenumber
-set ruler
+" Orientation {{{2
+set number          " enable line numbers (current line absolute)
+set relativenumber  " use relative line numbers
+set ruler           " always show position in file
+set scrolloff=2     " number of lines always below/above cursor
 " }}}2
 " Color scheme {{{2
 set t_Co=256
 color wombat256mod                  " TODO fork wombat
 highlight TabLineFill ctermfg=234
+" }}}2
+" }}}1
+
+" Plugin configuration {{{1
+" Guillotine {{{2
+augroup guillotine
+    autocmd!
+    autocmd BufEnter * if exists(":ToggleHeaderSource") | execute "nmap <buffer> ga :ToggleHeaderSource<cr>" | endif
+augroup END
 " }}}2
 " }}}1
