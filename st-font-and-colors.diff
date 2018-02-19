@@ -1,0 +1,81 @@
+diff --git a/config.def.h b/config.def.h
+index 877afab..9664e3b 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -5,7 +5,7 @@
+  *
+  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
+  */
+-char font[] = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
++char font[] = "FantasqueSansMono:pixelsize=17:style=SemiCondensed";
+ int borderpx = 2;
+ 
+ /*
+@@ -84,31 +84,31 @@ static unsigned int tabspaces = 8;
+ 
+ /* Terminal colors (16 first used in escape sequence) */
+ const char *colorname[] = {
+-	/* 8 normal colors */
+-	"black",
+-	"red3",
+-	"green3",
+-	"yellow3",
+-	"blue2",
+-	"magenta3",
+-	"cyan3",
+-	"gray90",
+-
+-	/* 8 bright colors */
+-	"gray50",
+-	"red",
+-	"green",
+-	"yellow",
+-	"#5c5cff",
+-	"magenta",
+-	"cyan",
+-	"white",
+-
+-	[255] = 0,
+-
+-	/* more colors can be added after 255 to use with DefaultXX */
+-	"#cccccc",
+-	"#555555",
++	/* 8 normal colors */
++	"#000000",
++	"#FF605A",
++	"#B1E869",
++	"#EAD89C",
++	"#5DA9F6",
++	"#E86AFF",
++	"#82FFF6",
++	"#DED9CE",
++
++	/* 8 bright colors */
++	"#313131",
++	"#F58B7F",
++	"#DCF88F",
++	"#EEE5B2",
++	"#A5C7FF",
++	"#DDAAFF",
++	"#B6FFF9",
++	"#FEFFFE",
++
++	[255] = 0,
++
++	/* more colors can be added after 255 to use with DefaultXX */
++	"#DED9CE",
++	"#171717",
+ };
+ 
+ 
+@@ -117,8 +117,8 @@ const char *colorname[] = {
+  * foreground, background, cursor, reverse cursor
+  */
+ unsigned int defaultfg = 7;
+-unsigned int defaultbg = 0;
+-unsigned int defaultcs = 256;
++unsigned int defaultbg = 257;
++unsigned int defaultcs = 7;
+ unsigned int defaultrcs = 257;
+ 
+ /*
