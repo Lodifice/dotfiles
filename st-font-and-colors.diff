@@ -64,7 +64,7 @@ index 877afab..9664e3b 100644
 +
 +	/* more colors can be added after 255 to use with DefaultXX */
 +	"#DED9CE",
-+	"#171717",
++	"#1c1c1c",
  };
  
  

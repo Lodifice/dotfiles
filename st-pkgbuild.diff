@@ -26,11 +26,11 @@ index 7d9b4df..478d506 100644
 +          '6a41683a04375f192d014cead227c749c595a721'
 +          '81b4a93c7bbf6854ec60630a5f7f50268a106a4b'
 +          'b181427a52dea0f1b5635cf51263a016d4d27cdf'
-+          '3d4df0ee06e9a415265cfcfc36640dc7526c7844')
++          'c20f01406689e3c9275e89e9ff69a25d17941e1b')
  
  provides=("${_pkgname}")
  conflicts=("${_pkgname}")
-@@ -29,11 +37,6 @@ pkgver() {
+@@ -29,11 +37,7 @@ pkgver() {
  prepare() {
  	local file
  	cd "${_pkgname}"
@@ -39,6 +39,7 @@ index 7d9b4df..478d506 100644
 -		-e '/char worddelimiters/s/= .*/= " '"'"'`\\\"()[]{}<>|";/' \
 -		-e '/int defaultcs/s/= .*/= 1;/' \
 -		-i config.def.h
++	sed -e '/char worddelimiters/s/= .*/= " '"'"'`\\\"()[]{}<>|";/' -i config.def.h
  	sed \
  		-e 's/CPPFLAGS =/CPPFLAGS +=/g' \
  		-e 's/CFLAGS =/CFLAGS +=/g' \
