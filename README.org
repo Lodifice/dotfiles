@@ -1,0 +1,20 @@
+#+TITLE: dotfiles
+These are my dotfiles.  I use this repository as a personal backup and for
+synchronization between my machines.
+* Setup
+  Invoking make will create a symlink in your home directory for each file in
+  this directory that starts with a dot.
+
+  The special target for st will download the PKGBUILD from the AUR, clone
+  the st repository, apply my and some other patches, build the package and
+  finally install it.
+* Contribution
+  These are MY dotfiles.  I use this repository as a PERSONAL backup and for
+  synchronization between MY machines.
+
+  If you have a great additions in mind, consider creating your own dotfiles
+  repository and I will steal it from you.  If you are really kind, open an
+  issue and point me to your solution.
+
+  No pull requests.  I will test everything locally and tweak with it a bit,
+  then I'll commit it once I'm content.
