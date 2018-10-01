@@ -15,7 +15,7 @@ all: $(LINKS) plugins st-install st-uninstall
 
 # TODO switch to ~ before executing and use vpath
 ~/.%:
-	ln -s ~/dotfiles/.$* $@
+	mkdir -p $(dir $@) && cd $(dir $@) && ln -s ~/dotfiles/.$* $(notdir $@)
 
 plugins: $(VUNDLEDIR)
 	vim +PluginUpdate +PluginClean +qa
