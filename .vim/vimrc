@@ -68,10 +68,14 @@ set wildmode=longest:full,full  " Make completion behave like in zsh
 
 " Visuals {{{1
 " Orientation {{{2
-set number          " enable line numbers (current line absolute)
-set relativenumber  " use relative line numbers
-set ruler           " always show position in file
-set scrolloff=2     " number of lines always below/above cursor
+set number              " enable line numbers (current line absolute)
+set relativenumber      " use relative line numbers
+set ruler               " always show position in file
+set scrolloff=5         " number of lines always below/above cursor
+set wrap linebreak      " wrap on word bounds
+set breakindent         " indent wrapped lines as previous line
+set showcmd             " show currently pending command string
+set cursorline          " highlight current line
 " }}}2
 " Color scheme {{{2
 set t_Co=256
