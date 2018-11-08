@@ -60,6 +60,10 @@ set undolevels=777  " normal mode history
 " Buffer management {{{2
 set hidden          " Make it possible to switch buffers without writing
 " }}}2
+" Command line completion {{{2
+set wildmenu                    " Show possible completions
+set wildmode=longest:full,full  " Make completion behave like in zsh
+" }}}2
 " }}}1
 
 " Visuals {{{1
