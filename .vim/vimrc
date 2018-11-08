@@ -43,7 +43,7 @@ set noswapfile
 " }}}2
 " Tabs and spaces {{{2
 set expandtab       " expand tabs to spaces
-set tabstop=4       " each tab is 4 spaces
+set softtabstop=4   " each tab is 4 spaces
 set shiftwidth=4    " use 4 spaces for each indent level
 set shiftround      " orientate indent on shiftwidth
 " }}}2
