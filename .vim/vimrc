@@ -73,6 +73,9 @@ set scrolloff=2     " number of lines always below/above cursor
 set t_Co=256
 color wombat256mod
 " }}}2
+" Font {{{2
+set guifont="Fantasque Sans Mono 12"
+" }}}2
 " }}}1
 
 " Plugin configuration {{{1
