@@ -86,6 +86,11 @@ set guifont="Fantasque Sans Mono 12"
 " }}}2
 " }}}1
 
+" Mappings {{{1
+" Remove search highlighting
+noremap <Leader><Leader> :nohlsearch<Cr>
+" }}}1
+
 " Plugin configuration {{{1
 " Guillotine {{{2
 augroup guillotine
