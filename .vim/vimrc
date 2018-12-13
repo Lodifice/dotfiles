@@ -28,9 +28,7 @@ Plugin 'lodifice/wombat256.vim'
 Plugin 'miyakogi/seiya.vim'
 Plugin 'lodifice/mzview.vim'
 "Plugin 'ctrlpvim/ctrlp.vim'
-" }}}2
 call vundle#end()
-" }}}1
 
 filetype plugin indent on
 syntax on
@@ -40,31 +38,32 @@ syntax on
 set nobackup
 set nowritebackup
 set noswapfile
-" }}}2
+
+" Sanity defaults {{{2
+set clipboard=      " Welches Rindvieh hat `autoselect` als Default eingestellt?
+
 " Tabs and spaces {{{2
 set expandtab       " expand tabs to spaces
 set softtabstop=4   " each tab is 4 spaces
 set shiftwidth=4    " use 4 spaces for each indent level
 set shiftround      " orientate indent on shiftwidth
-" }}}2
+"
 " Search {{{2
 set hlsearch        " always highlight search results
 set incsearch       " search incrementally
 set ignorecase      " ignore case when searching
 set smartcase       " ignore ignorecase when uppercase letter in search string
-" }}}2
+"
 " History & undo levels {{{2
 set history=777     " command line history
 set undolevels=777  " normal mode history
-" }}}2
+
 " Buffer management {{{2
 set hidden          " Make it possible to switch buffers without writing
-" }}}2
+
 " Command line completion {{{2
 set wildmenu                    " Show possible completions
 set wildmode=longest:full,full  " Make completion behave like in zsh
-" }}}2
-" }}}1
 
 " Visuals {{{1
 " Orientation {{{2
@@ -76,20 +75,17 @@ set wrap linebreak      " wrap on word bounds
 set breakindent         " indent wrapped lines as previous line
 set showcmd             " show currently pending command string
 set cursorline          " highlight current line
-" }}}2
+
 " Color scheme {{{2
 set t_Co=256
 color wombat256mod
-" }}}2
+
 " Font {{{2
 set guifont="Fantasque Sans Mono 12"
-" }}}2
-" }}}1
 
 " Mappings {{{1
 " Remove search highlighting
 noremap <Leader><Leader> :nohlsearch<Cr>
-" }}}1
 
 " Plugin configuration {{{1
 " Guillotine {{{2
@@ -97,5 +93,3 @@ augroup guillotine
     autocmd!
     autocmd BufEnter * if exists(":ToggleHeaderSource") | execute "nmap <buffer> ga :ToggleHeaderSource<cr>" | endif
 augroup END
-" }}}2
-" }}}1
