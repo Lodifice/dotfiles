@@ -26,10 +26,6 @@ bspc rule -a Zathura state=tiled
 bspc rule -a Tilda state=floating focus=on locked=on manage=on
 bspc rule -a Pinentry state=floating focus=on locked=on manage=on
 
-stalonetray &
-nm-applet &
-redshift-gtk &
-cbatticon &
 tilda -h &
 conky
 $HOME/mpd-libnotify/mpdnotify start
