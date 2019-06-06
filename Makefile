@@ -1,4 +1,4 @@
-IGNORE = .git
+IGNORE = .git .gitignore
 FILES = $(filter-out $(IGNORE), $(wildcard .*))
 LINKS = $(FILES:%=~/%)
 
