@@ -9,9 +9,12 @@ ST_PACKAGE = st-git
 ST_FILES = /usr/bin/st /usr/share/doc/st-git/README /usr/share/licenses/st-git/LICENSE /usr/share/man/man1/st.1.gz
 ST_AUR_REPO = https://aur.archlinux.org/st-git.git
 
+XKB_LAYOUT := /usr/share/X11/xkb/symbols/my_gb
+XORG_KBD_CONF := /etc/X11/xorg.conf.d/00-keyboard.conf
+
 all: $(LINKS) plugins st-install st-uninstall
 
-.PHONY: all plugins st-install
+.PHONY: all plugins st-install xkb
 
 # TODO switch to ~ before executing and use vpath
 ~/.%:
@@ -42,3 +45,13 @@ $(ST_FILES): st-pkgbuild.diff st-font-and-colors.diff
 
 st-uninstall:
 	sudo pacman -Runs $(ST_PACKAGE)
+
+xkb: $(XKB_LAYOUT) $(XORG_KBD_CONF)
+
+.SECONDEXPANSION:
+
+$(XKB_LAYOUT): $$(notdir $$@)
+	sudo ln -s $(realpath $<) $@
+
+$(XORG_KBD_CONF): $$(notdir $$@)
+	sudo ln -s $(realpath $<) $@

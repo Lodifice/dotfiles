@@ -1,0 +1,11 @@
+// deployed via dotfiles
+
+partial alphanumeric_keys
+xkb_symbols "swapyz" {
+    include "gb"
+
+    name[Group1]="English (UK, swapped y and z)";
+
+    key <AD06>  { [         z,          Z,    leftarrow,          yen ] };
+    key <AB01>  { [         y,          Y, guillemotleft,        less ] };
+};
