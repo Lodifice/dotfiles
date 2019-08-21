@@ -341,7 +341,7 @@ include "%L"
 <Multi_key> <minus> <bar>                   : "⊣" U22A3 # \dashv            # LEFT TACK
 <Multi_key> <t> <o> <p>                     : "⊤" U22A4 # \top              # DOWN TACK
 <Multi_key> <b> <o> <t>                     : "⊥" U22A5 # \bot              # UP TACK
-<Multi-key> <bar> <equals>                  : "⊧" U22A7 # \models           # MODELS
+<Multi_key> <bar> <equals>                  : "⊧" U22A7 # \models           # MODELS
 <Multi_key> <bar> <slash> <minus>           : "⊬" U22AC # \nvdash           # DOES NOT PROVE
 <Multi_key> <less> <bar>                    : "⊲" U22B2 # \vartriangleleft  # NORMAL SUBGROUP OF
 <Multi_key> <greater> <bar>                 : "⊳" U22B3 # \vartriangleright # CONTAINS AS NORMAL SUBGROUP
