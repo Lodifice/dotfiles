@@ -1,6 +1,8 @@
 IGNORE = .git .gitignore
 FILES = $(filter-out $(IGNORE), $(wildcard .*))
 LINKS = $(FILES:%=~/%)
+SCRIPTS = bin
+BIN = ~/$(SCRIPTS)
 
 BUNDLEDIR = .vim/bundle
 VUNDLEDIR = $(BUNDLEDIR)/Vundle.vim
@@ -14,11 +16,14 @@ XORG_KBD_CONF := /etc/X11/xorg.conf.d/00-keyboard.conf
 
 all: $(LINKS) plugins st-install st-uninstall
 
-.PHONY: all plugins st-install xkb
+.PHONY: all $(BIN) plugins st-install xkb
 
 # TODO switch to ~ before executing and use vpath
 ~/.%:
 	ln -s ~/dotfiles/.$* $@
+
+$(BIN): $(SCRIPTS)
+	ln -s ~/dotfiles/$< $@
 
 plugins: $(VUNDLEDIR)
 	vim +PluginUpdate +PluginClean +qa

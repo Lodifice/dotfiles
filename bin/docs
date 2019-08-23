@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+DOCSDIR="$HOME/docs/"
+ls "$DOCSDIR" | dmenu | xargs -I{} xdg-open "$DOCSDIR/{}"
