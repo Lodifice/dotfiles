@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+[ -z "$PAPERSDIR" ] && PAPERSDIR="$HOME/papers"
+
+#python <(sed 1,10d $0) < "$PAPERSDIR"/db.bib | dmenu -i -l 10 | cut -f1 | xargs -I{} xdg-open "$PAPERSDIR/{}.pdf"
+python <(sed 1,10d $0) < "$PAPERSDIR"/db.bib | rofi -dmenu -i | cut -f1 | xargs -I{} xdg-open "$PAPERSDIR/{}.pdf"
+
+exit
+
+###############################################################################
+
+import sys
+import bibtexparser
+
+bibtex = sys.stdin.read()
+bibliography = bibtexparser.loads(bibtex)
+for entry in bibliography.entries:
+    print(entry["ID"], entry["title"], entry["author"], entry["year"], sep='\t')
