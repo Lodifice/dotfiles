@@ -26,6 +26,14 @@ super + r
 super + u
     slock
 
+# open documentation
+super + d
+    docs
+
+# open paper
+super + y
+    papers
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
