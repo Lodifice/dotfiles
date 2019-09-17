@@ -31,7 +31,7 @@ super + d
     docs
 
 # open paper
-super + y
+super + x
     papers
 
 # make sxhkd reload its configuration files:
