@@ -1,16 +1,12 @@
 #!/usr/bin/env bash
 mbconf=~/.config/mbsync/tu-dresden
 
-pass_re="PassCmd \+\"(.*)\""
-passcmd_line=$(grep ^PassCmd $mbconf)
-nlines=$(wc -l <(echo "$passcmd_line") | cut -f1 -d' ')
-if [[ "$nlines" -eq 1 && "$passcmd_line" =~ $pass_re ]]
-then
-    passcmd=${BASH_REMATCH[1]}
-else
-    echo "error: $mbconf: does not contain exactly one PassCmd"
-    exit 1
-fi
+passcmd=$(sed -e '/^PassCmd/!d' -e 's/^PassCmd +\?"\(.*\)"$/\1/' "$mbconf")
+OLDIFS=$IFS
+IFS=$'\n' # let's make sure we split on newline chars
+pc=(${passcmd})
+IFS=$OLDIFS
+[ "${#pc[@]}" -eq 1 ] || { echo "error: $mbconf: does not contain exactly one PassCmd"; exit 1; }
 
 before_pw=$(sed '/PassCmd/,$d' "$mbconf")
 pw=$(echo "Pass $($passcmd)")
