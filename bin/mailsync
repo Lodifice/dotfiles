@@ -1,21 +1,41 @@
 #!/usr/bin/env bash
+# mailsync FILE...
+#
+# Read mbsync configuration FILE(s) and periodically call mbsync for each of
+# them.
+#
+# Each FILE is expected to contain the configuration for exactly one mailbox.
+# It is also expected to contain exactly one PassCmd line.  This script will
+# execute the specified PassCmd and store the password.  Upon invocation of
+# mbsync, a variant of the configuration where the PassCmd line is replaced by
+# a Pass line with the cleartext password will be used.  This is done in such a
+# way that no other process can read the password.
+
+# make sure there is one mailbox
 [ "$#" -eq 0 ] && { echo "error: 0 mailboxes provided"; exit 1; }
 
+# modified configurations will be stored inside an array
 declare -a configs
 
+# prepare each configuration file
 for mbconf in $@
 do
+    # get all PassCmd lines from the file
     passcmd=$(sed -e '/^PassCmd/!d' -e 's/^PassCmd +\?"\(.*\)"$/\1/' "$mbconf")
+    # count them by constructing a Bash array from this output
     OLDIFS=$IFS
-    IFS=$'\n' # let's make sure we split on newline chars
+    IFS=$'\n'
     pc=(${passcmd})
     IFS=$OLDIFS
+    # now we can use the length operator of Bash arrays
     [ "${#pc[@]}" -eq 1 ] || { echo "error: $mbconf: does not contain exactly one PassCmd"; exit 1; }
 
+    # get the password and embed it into the configuration
     before_pw=$(sed '/PassCmd/,$d' "$mbconf")
     pw=$(echo "Pass $($passcmd)")
     after_pw=$(sed '1,/PassCmd/d' "$mbconf")
 
+    # store the configuration in the `configs` array
     configs+=("$before_pw
 $pw
 $after_pw")
