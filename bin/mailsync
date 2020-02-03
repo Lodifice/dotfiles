@@ -1,19 +1,31 @@
 #!/usr/bin/env bash
-mbconf=~/.config/mbsync/tu-dresden
+[ "$#" -eq 0 ] && { echo "error: 0 mailboxes provided"; exit 1; }
 
-passcmd=$(sed -e '/^PassCmd/!d' -e 's/^PassCmd +\?"\(.*\)"$/\1/' "$mbconf")
-OLDIFS=$IFS
-IFS=$'\n' # let's make sure we split on newline chars
-pc=(${passcmd})
-IFS=$OLDIFS
-[ "${#pc[@]}" -eq 1 ] || { echo "error: $mbconf: does not contain exactly one PassCmd"; exit 1; }
+declare -a configs
 
-before_pw=$(sed '/PassCmd/,$d' "$mbconf")
-pw=$(echo "Pass $($passcmd)")
-after_pw=$(sed '1,/PassCmd/d' "$mbconf")
+for mbconf in $@
+do
+    passcmd=$(sed -e '/^PassCmd/!d' -e 's/^PassCmd +\?"\(.*\)"$/\1/' "$mbconf")
+    OLDIFS=$IFS
+    IFS=$'\n' # let's make sure we split on newline chars
+    pc=(${passcmd})
+    IFS=$OLDIFS
+    [ "${#pc[@]}" -eq 1 ] || { echo "error: $mbconf: does not contain exactly one PassCmd"; exit 1; }
+
+    before_pw=$(sed '/PassCmd/,$d' "$mbconf")
+    pw=$(echo "Pass $($passcmd)")
+    after_pw=$(sed '1,/PassCmd/d' "$mbconf")
+
+    configs+=("$before_pw
+$pw
+$after_pw")
+done
 
 while true
 do
-    mbsync -c <(echo "$before_pw"; echo "$pw"; echo "$after_pw") -a
+    for config in "${configs[@]}"
+    do
+        mbsync -c <(echo "$config") -a
+    done
     sleep 600
 done
