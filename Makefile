@@ -7,6 +7,9 @@ BIN = ~/$(SCRIPTS)
 BUNDLEDIR = .vim/bundle
 VUNDLEDIR = $(BUNDLEDIR)/Vundle.vim
 
+PASS_USER = gpg
+PASS_HOME = /home/$(PASS_USER)
+
 ST_PACKAGE = st-git
 ST_FILES = /usr/bin/st /usr/share/doc/st-git/README /usr/share/licenses/st-git/LICENSE /usr/share/man/man1/st.1.gz
 ST_AUR_REPO = https://aur.archlinux.org/st-git.git
@@ -16,7 +19,7 @@ XORG_KBD_CONF := /etc/X11/xorg.conf.d/00-keyboard.conf
 
 all: $(LINKS) plugins st-install st-uninstall
 
-.PHONY: all $(BIN) plugins st-install xkb
+.PHONY: all $(BIN) plugins st-install xkb pass-setup
 
 # TODO switch to ~ before executing and use vpath
 ~/.%:
@@ -60,3 +63,9 @@ $(XKB_LAYOUT): $$(notdir $$@)
 
 $(XORG_KBD_CONF): $$(notdir $$@)
 	sudo ln -s $(realpath $<) $@
+
+pass-setup: | $(PASS_HOME)
+
+$(PASS_HOME):
+	sudo useradd -Um gpg
+	@echo Now would be a good time to manually setup pass and gpg for this user
