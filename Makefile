@@ -10,6 +10,7 @@ VUNDLEDIR = $(BUNDLEDIR)/Vundle.vim
 PASS_USER = gpg
 PASS_HOME = /home/$(PASS_USER)
 PASS_WRAP = passwrap
+PASS_SYSD = $(PASS_HOME)/.config/systemd/user
 
 ST_PACKAGE = st-git
 ST_FILES = /usr/bin/st /usr/share/doc/st-git/README /usr/share/licenses/st-git/LICENSE /usr/share/man/man1/st.1.gz
@@ -20,7 +21,7 @@ XORG_KBD_CONF := /etc/X11/xorg.conf.d/00-keyboard.conf
 
 all: $(LINKS) plugins st-install st-uninstall
 
-.PHONY: all $(BIN) plugins st-install xkb pass-setup
+.PHONY: all $(BIN) plugins st-install xkb pass-setup mbsync-setup
 
 # TODO switch to ~ before executing and use vpath
 ~/.%:
@@ -65,6 +66,11 @@ $(XKB_LAYOUT): $$(notdir $$@)
 $(XORG_KBD_CONF): $$(notdir $$@)
 	sudo ln -s $(realpath $<) $@
 
+# TODO only execute the recipe if something has actually changed
+# least priority, as the recipe is idempotent
+mbsync-setup: pass-setup $(PASS_SYSD)/timers.target.wants/mbsync.timer $(PASS_SYSD)/mbsync.service
+	XDG_RUNTIME_DIR=/run/user/$$(id -u $(PASS_USER)) runuser -u $(PASS_USER) -- systemctl --user daemon-reload
+
 pass-setup: $(PASS_HOME)/$(PASS_WRAP)
 	
 $(PASS_HOME)/$(PASS_WRAP): | $(PASS_HOME)
@@ -82,3 +88,23 @@ $(PASS_HOME):
 	@echo "$(PASS_USER) ALL=(ALL) NOPASSWD: SYNC"
 	@echo "$(PASS_USER) ALL=(ALL) NOPASSWD: $(shell which pass)"
 	@echo
+
+$(PASS_SYSD): | $(PASS_HOME)
+	install -o $(PASS_USER) -g $(PASS_USER) -d $@
+
+# TODO the following is bad make, but shall we really use vpath here?
+$(PASS_SYSD)/%: pass-systemd/% | $(PASS_SYSD)
+	install -o $(PASS_USER) -g $(PASS_USER) pass-systemd/$* $@
+
+.PRECIOUS: $(PASS_SYSD)/%
+
+pass-systemd/%.service:
+	@echo "Please provide the service file $@"
+	@echo "It is to be obtained from $@.tpl by adding your personal information"
+	@false
+
+$(PASS_SYSD)/timers.target.wants/%: $(PASS_SYSD)/%
+	XDG_RUNTIME_DIR=/run/user/$$(id -u $(PASS_USER)) runuser -u $(PASS_USER) -- systemctl --user enable $*
+
+$(PASS_SYSD)/default.target.wants/%: $(PASS_SYSD)/%
+	XDG_RUNTIME_DIR=/run/user/$$(id -u $(PASS_USER)) runuser -u $(PASS_USER) -- systemctl --user enable $*
