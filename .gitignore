@@ -3,3 +3,4 @@
 !.gnupg/gpg.conf
 .mutt/account.*
 .mutt/aliases
+pass-systemd/mbsync.service
