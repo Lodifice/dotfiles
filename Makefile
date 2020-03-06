@@ -9,6 +9,7 @@ VUNDLEDIR = $(BUNDLEDIR)/Vundle.vim
 
 PASS_USER = gpg
 PASS_HOME = /home/$(PASS_USER)
+PASS_WRAP = passwrap
 
 ST_PACKAGE = st-git
 ST_FILES = /usr/bin/st /usr/share/doc/st-git/README /usr/share/licenses/st-git/LICENSE /usr/share/man/man1/st.1.gz
@@ -64,8 +65,20 @@ $(XKB_LAYOUT): $$(notdir $$@)
 $(XORG_KBD_CONF): $$(notdir $$@)
 	sudo ln -s $(realpath $<) $@
 
-pass-setup: | $(PASS_HOME)
+pass-setup: $(PASS_HOME)/$(PASS_WRAP)
+	
+$(PASS_HOME)/$(PASS_WRAP): | $(PASS_HOME)
+	install -o $(PASS_USER) -g $(PASS_USER) $(PASS_WRAP) $@
 
 $(PASS_HOME):
-	sudo useradd -Um gpg
-	@echo Now would be a good time to manually setup pass and gpg for this user
+	useradd -Um $(PASS_USER)
+	loginctl enable-linger $(PASS_USER)
+	@echo Remember to sudo-enable the $(PASS_USER) user to run your \
+	    synchronization services by adding the following lines to your \
+	    sudoers file
+	@echo
+	@echo "Cmnd_Alias SYNC = $(shell which mbsync) $(shell which vdirsyncer)"
+	@echo "Defaults!SYNC closefrom_override"
+	@echo "$(PASS_USER) ALL=(ALL) NOPASSWD: SYNC"
+	@echo "$(PASS_USER) ALL=(ALL) NOPASSWD: $(shell which pass)"
+	@echo

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+run_as_user=$1
+shift
+run_command=$1
+shift
+
+max_fd=0
+while [ -n "$1" ]
+do
+    exec {fd}< "$1"
+    export "PASS_FD_$1"="$fd"
+    max_fd=$((fd>max_fd ? fd : max_fd))
+    shift
+done
+
+sudo -C $max_fd -u $run_as_user $run_command
