@@ -4,11 +4,13 @@ shift
 run_command=$1
 shift
 
-max_fd=0
+max_fd=4
 while [ -n "$1" ]
 do
-    exec {fd}< "$1"
-    export "PASS_FD_$1"="$fd"
+    fname=(/tmp/pass-user-pws*/$1)
+    exec {fd}< "${fname[@]}"
+    env_var="PASS_FD_${1//-/_}"
+    export "$env_var"="$fd"
     max_fd=$((fd>max_fd ? fd : max_fd))
     shift
 done
