@@ -10,6 +10,7 @@ VUNDLEDIR = $(BUNDLEDIR)/Vundle.vim
 PASS_USER = gpg
 PASS_HOME = /home/$(PASS_USER)
 PASS_WRAP = passwrap
+PASS_INIT = passinit
 PASS_SYSD = $(PASS_HOME)/.config/systemd/user
 
 ST_PACKAGE = st-git
@@ -71,10 +72,18 @@ $(XORG_KBD_CONF): $$(notdir $$@)
 mbsync-setup: pass-setup $(PASS_SYSD)/timers.target.wants/mbsync.timer $(PASS_SYSD)/mbsync.service
 	XDG_RUNTIME_DIR=/run/user/$$(id -u $(PASS_USER)) runuser -u $(PASS_USER) -- systemctl --user daemon-reload
 
-pass-setup: $(PASS_HOME)/$(PASS_WRAP)
+pass-setup: $(PASS_HOME)/$(PASS_WRAP) $(PASS_HOME)/$(PASS_INIT)
 	
 $(PASS_HOME)/$(PASS_WRAP): $(PASS_WRAP) | $(PASS_HOME)
 	install -o $(PASS_USER) -g $(PASS_USER) $< $@
+
+$(PASS_HOME)/$(PASS_INIT): $(PASS_INIT) | $(PASS_HOME)
+	install -o $(PASS_USER) -g $(PASS_USER) $< $@
+
+$(PASS_INIT): $(PASS_INIT).tpl
+	@echo "Please provide the file $@"
+	@echo "It is to be obtained from $@.tpl by adding your personal information"
+	@false
 
 $(PASS_HOME):
 	useradd -Um $(PASS_USER)

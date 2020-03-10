@@ -4,3 +4,4 @@
 .mutt/account.*
 .mutt/aliases
 pass-systemd/mbsync.service
+passinit
