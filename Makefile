@@ -73,8 +73,8 @@ mbsync-setup: pass-setup $(PASS_SYSD)/timers.target.wants/mbsync.timer $(PASS_SY
 
 pass-setup: $(PASS_HOME)/$(PASS_WRAP)
 	
-$(PASS_HOME)/$(PASS_WRAP): | $(PASS_HOME)
-	install -o $(PASS_USER) -g $(PASS_USER) $(PASS_WRAP) $@
+$(PASS_HOME)/$(PASS_WRAP): $(PASS_WRAP) | $(PASS_HOME)
+	install -o $(PASS_USER) -g $(PASS_USER) $< $@
 
 $(PASS_HOME):
 	useradd -Um $(PASS_USER)
@@ -83,7 +83,7 @@ $(PASS_HOME):
 	    synchronization services by adding the following lines to your \
 	    sudoers file
 	@echo
-	@echo "Cmnd_Alias SYNC = $(shell which mbsync) $(shell which vdirsyncer)"
+	@echo "Cmnd_Alias SYNC = $(shell which mbsync), $(shell which vdirsyncer)"
 	@echo "Defaults!SYNC closefrom_override"
 	@echo "$(PASS_USER) ALL=(ALL) NOPASSWD: SYNC"
 	@echo "$(PASS_USER) ALL=(ALL) NOPASSWD: $(shell which pass)"
