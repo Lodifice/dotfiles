@@ -72,7 +72,7 @@ $(XORG_KBD_CONF): $$(notdir $$@)
 mbsync-setup: pass-setup $(PASS_SYSD)/timers.target.wants/mbsync.timer $(PASS_SYSD)/mbsync.service
 	XDG_RUNTIME_DIR=/run/user/$$(id -u $(PASS_USER)) runuser -u $(PASS_USER) -- systemctl --user daemon-reload
 
-pass-setup: $(PASS_HOME)/$(PASS_WRAP) $(PASS_HOME)/$(PASS_INIT)
+pass-setup: $(PASS_HOME)/$(PASS_WRAP) $(PASS_HOME)/$(PASS_INIT) /etc/systemd/system/graphical.target.wants/passinit.service
 	
 $(PASS_HOME)/$(PASS_WRAP): $(PASS_WRAP) | $(PASS_HOME)
 	install -o $(PASS_USER) -g $(PASS_USER) $< $@
@@ -80,7 +80,7 @@ $(PASS_HOME)/$(PASS_WRAP): $(PASS_WRAP) | $(PASS_HOME)
 $(PASS_HOME)/$(PASS_INIT): $(PASS_INIT) | $(PASS_HOME)
 	install -o $(PASS_USER) -g $(PASS_USER) $< $@
 
-$(PASS_INIT): $(PASS_INIT).tpl
+$(PASS_INIT):
 	@echo "Please provide the file $@"
 	@echo "It is to be obtained from $@.tpl by adding your personal information"
 	@false
@@ -97,6 +97,12 @@ $(PASS_HOME):
 	@echo "$(PASS_USER) ALL=(ALL) NOPASSWD: SYNC"
 	@echo "$(PASS_USER) ALL=(ALL) NOPASSWD: $(shell which pass)"
 	@echo
+
+/etc/systemd/system/graphical.target.wants/passinit.service: /etc/systemd/system/passinit.service
+	systemctl enable $(notdir $<)
+
+/etc/systemd/system/passinit.service: passinit.service
+	cp $< $@
 
 $(PASS_SYSD): | $(PASS_HOME)
 	install -o $(PASS_USER) -g $(PASS_USER) -d $@

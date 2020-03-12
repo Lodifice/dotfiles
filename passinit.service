@@ -1,0 +1,12 @@
+[Unit]
+Description=passinit service
+After=graphical.target
+
+[Service]
+Type=oneshot
+Environment=DISPLAY=:0
+ExecStart=/home/gpg/passinit
+User=gpg
+
+[Install]
+WantedBy=graphical.target
