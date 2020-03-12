@@ -1,5 +1,6 @@
 [Unit]
 Description=mbsync service
+ConditionPathExistsGlob=/tmp/pass-user-pws*
 
 [Service]
 Type=oneshot
