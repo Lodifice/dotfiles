@@ -15,4 +15,4 @@ do
     shift
 done
 
-sudo -C $max_fd -u $run_as_user $run_command
+sudo -C $((max_fd+1)) -u $run_as_user $run_command

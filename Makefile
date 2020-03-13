@@ -94,6 +94,7 @@ $(PASS_HOME):
 	@echo
 	@echo "Cmnd_Alias SYNC = $(shell which mbsync), $(shell which vdirsyncer)"
 	@echo "Defaults!SYNC closefrom_override"
+	@echo "Defaults!SYNC env_keep += \"PASS_FD_*\""
 	@echo "$(PASS_USER) ALL=(ALL) NOPASSWD: SYNC"
 	@echo "$(PASS_USER) ALL=(ALL) NOPASSWD: $(shell which pass)"
 	@echo
