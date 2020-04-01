@@ -7,11 +7,15 @@ BIN = ~/$(SCRIPTS)
 BUNDLEDIR = .vim/bundle
 VUNDLEDIR = $(BUNDLEDIR)/Vundle.vim
 
+# TODO make the following determine the user automatically
+MY_USER = richard
+MY_SYSD = /home/$(MY_USER)/.config/systemd/user
+
 PASS_USER = gpg
 PASS_HOME = /home/$(PASS_USER)
 PASS_WRAP = passwrap
-PASS_INIT = passinit
 PASS_SYSD = $(PASS_HOME)/.config/systemd/user
+PASS_INIT = /usr/local/bin/passinit
 
 ST_PACKAGE = st-git
 ST_FILES = /usr/bin/st /usr/share/doc/st-git/README /usr/share/licenses/st-git/LICENSE /usr/share/man/man1/st.1.gz
@@ -72,15 +76,15 @@ $(XORG_KBD_CONF): $$(notdir $$@)
 mbsync-setup: pass-setup $(PASS_SYSD)/timers.target.wants/mbsync.timer $(PASS_SYSD)/mbsync.service
 	XDG_RUNTIME_DIR=/run/user/$$(id -u $(PASS_USER)) runuser -u $(PASS_USER) -- systemctl --user daemon-reload
 
-pass-setup: $(PASS_HOME)/$(PASS_WRAP) $(PASS_HOME)/$(PASS_INIT) /etc/systemd/system/graphical.target.wants/passinit.service
+pass-setup: $(PASS_HOME)/$(PASS_WRAP) $(PASS_INIT) $(MY_SYSD)/xsession.target.wants/passinit.service /etc/sudoers.d/pass-user
 	
 $(PASS_HOME)/$(PASS_WRAP): $(PASS_WRAP) | $(PASS_HOME)
 	install -o $(PASS_USER) -g $(PASS_USER) $< $@
 
-$(PASS_HOME)/$(PASS_INIT): $(PASS_INIT) | $(PASS_HOME)
-	install -o $(PASS_USER) -g $(PASS_USER) $< $@
+$(PASS_INIT): $$(notdir $$@)
+	install $< $@
 
-$(PASS_INIT):
+passinit:
 	@echo "Please provide the file $@"
 	@echo "It is to be obtained from $@.tpl by adding your personal information"
 	@false
@@ -88,22 +92,17 @@ $(PASS_INIT):
 $(PASS_HOME):
 	useradd -Um $(PASS_USER)
 	loginctl enable-linger $(PASS_USER)
-	@echo Remember to sudo-enable the $(PASS_USER) user to run your \
-	    synchronization services by adding the following lines to your \
-	    sudoers file
-	@echo
-	@echo "Cmnd_Alias SYNC = $(shell which mbsync), $(shell which vdirsyncer)"
-	@echo "Defaults!SYNC closefrom_override"
-	@echo "Defaults!SYNC env_keep += \"PASS_FD_*\""
-	@echo "$(PASS_USER) ALL=(ALL) NOPASSWD: SYNC"
-	@echo "$(PASS_USER) ALL=(ALL) NOPASSWD: $(shell which pass)"
-	@echo
 
-/etc/systemd/system/graphical.target.wants/passinit.service: /etc/systemd/system/passinit.service
-	systemctl enable $(notdir $<)
+/etc/sudoers.d/pass-user: pass-user-sudoers
+	install $< $@
 
-/etc/systemd/system/passinit.service: passinit.service
-	cp $< $@
+# TODO this is generic, move it to a more prominent place
+$(MY_SYSD)/xsession.target.wants/%: $(MY_SYSD)/%
+	runuser -u $(MY_USER) -- systemctl --user enable $*
+	runuser -u $(MY_USER) -- systemctl --user daemon-reload
+
+$(MY_SYSD)/passinit.service: passinit.service
+	runuser -u $(MY_USER) -- cp $< $@
 
 $(PASS_SYSD): | $(PASS_HOME)
 	install -o $(PASS_USER) -g $(PASS_USER) -d $@
