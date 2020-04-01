@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-export DISPLAY=:0
+[ "$(whoami)" = gpg ] || exit 1
 tmpdir=$(mktemp -d /tmp/pass-user-pwsXXX)
 
 # Enter your pass entries here.
