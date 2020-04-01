@@ -6,5 +6,5 @@ tmpdir=$(mktemp -d /tmp/pass-user-pwsXXX)
 # Note: they will be basename'd, so the basenames shall not overlap
 for pw in $PASS_ENTRIES
 do
-    sudo -u richard pass "$pw" > "$tmpdir/$(basename $pw)"
+    sudo -u $USER pass "$pw" > "$tmpdir/$(basename $pw)"
 done
