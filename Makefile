@@ -94,7 +94,7 @@ $(PASS_HOME):
 	loginctl enable-linger $(PASS_USER)
 
 /etc/sudoers.d/pass-user: pass-user-sudoers
-	install $< $@
+	install -m 0440 $< $@
 
 # TODO this is generic, move it to a more prominent place
 $(MY_SYSD)/xsession.target.wants/%: $(MY_SYSD)/%
