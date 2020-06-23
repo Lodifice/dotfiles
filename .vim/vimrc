@@ -88,6 +88,8 @@ set guifont="Fantasque Sans Mono 12"
 noremap <Leader><Leader> :nohlsearch<Cr>
 " Filetype detection
 nnoremap <leader>f :filetype detect<cr>
+" Sanitize comments in HTML e-mails
+nnoremap <leader>c <esc>:'<,'>s/^> //<cr>:'<,'>!w3m -T text/html -I UTF-8<cr>
 
 " Plugin configuration {{{1
 " Guillotine {{{2
