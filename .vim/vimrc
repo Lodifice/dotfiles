@@ -86,6 +86,8 @@ set guifont="Fantasque Sans Mono 12"
 " Mappings {{{1
 " Remove search highlighting
 noremap <Leader><Leader> :nohlsearch<Cr>
+" Filetype detection
+nnoremap <leader>f :filetype detect<cr>
 
 " Plugin configuration {{{1
 " Guillotine {{{2
