@@ -93,3 +93,9 @@ augroup guillotine
     autocmd!
     autocmd BufEnter * if exists(":ToggleHeaderSource") | execute "nmap <buffer> ga :ToggleHeaderSource<cr>" | endif
 augroup END
+
+augroup diffmode
+    autocmd!
+    autocmd OptionSet diff let &cursorline=!v:option_new
+    autocmd BufEnter * if !&diff | let &cursorline=1 |endif
+augroup END
