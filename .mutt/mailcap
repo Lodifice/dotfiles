@@ -1,4 +1,4 @@
 text/html; w3m -I %{charset} -T %t; copiousoutput;
 message/rfc822; view -Mf %s; edit=vim -f %s; compose=vim -f %s; needsterminal;
 application/pdf; mutt_bgrun zathura %s;
-image/jpeg; mutt_bgrun sxiv %s;
+image/*; mutt_bgrun sxiv %s;
