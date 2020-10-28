@@ -1,8 +1,11 @@
+# use xdg user-dirs defaults and systemd-path definitions
+XDG_CONFIG_HOME ?= $(HOME)/.config
+USER_BINARIES := $(shell systemd-path user-binaries)
+
 IGNORE = .git .gitignore
 FILES = $(filter-out $(IGNORE), $(wildcard .*))
 LINKS = $(FILES:%=~/%)
-SCRIPTS = bin
-BIN = ~/$(SCRIPTS)
+SCRIPTS = $(realpath bin)
 
 BUNDLEDIR = .vim/bundle
 VUNDLEDIR = $(BUNDLEDIR)/Vundle.vim
@@ -24,16 +27,16 @@ ST_AUR_REPO = https://aur.archlinux.org/st-git.git
 XKB_LAYOUT := /usr/share/X11/xkb/symbols/my_gb
 XORG_KBD_CONF := /etc/X11/xorg.conf.d/00-keyboard.conf
 
-all: $(LINKS) plugins st-install st-uninstall
+all: $(LINKS) $(patsubst $(SCRIPTS)%,$(USER_BINARIES)%,$(wildcard $(SCRIPTS)/*)) plugins st-install st-uninstall
 
-.PHONY: all $(BIN) plugins st-install xkb pass-setup mbsync-setup
+.PHONY: all plugins st-install xkb pass-setup mbsync-setup
 
 # TODO switch to ~ before executing and use vpath
 ~/.%:
 	ln -s ~/dotfiles/.$* $@
 
-$(BIN): $(SCRIPTS)
-	ln -s ~/dotfiles/$< $@
+$(USER_BINARIES)/%: $(SCRIPTS)/%
+	ln -s $< $@
 
 plugins: $(VUNDLEDIR)
 	vim +PluginUpdate +PluginClean +qa
