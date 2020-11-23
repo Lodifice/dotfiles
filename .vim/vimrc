@@ -85,7 +85,7 @@ set guifont="Fantasque Sans Mono 12"
 
 " Mappings {{{1
 " Remove search highlighting
-noremap <Leader><Leader> :nohlsearch<Cr>
+nnoremap <Esc> :nohlsearch<cr>
 " Filetype detection
 nnoremap <leader>f :filetype detect<cr>
 " Sanitize comments in HTML e-mails
