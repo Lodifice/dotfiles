@@ -1,0 +1,7 @@
+cmd open-within ${{
+    case $(file --brief --mime-type $f) in
+        application/pdf) devour zathura $fx;;
+    esac
+}}
+
+map <enter> open-within
