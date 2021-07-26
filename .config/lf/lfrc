@@ -1,6 +1,8 @@
-cmd open-within ${{
+cmd open-within %{{
     case $(file --brief --mime-type $f) in
-        application/pdf) devour zathura $fx;;
+        text/*) lf -remote "send $id push e" ;;
+        inode/*) lf -remote "send $id push l" ;;
+        *) devour xdg-open $fx ;;
     esac
 }}
 
