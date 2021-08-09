@@ -1,7 +1,6 @@
 URxvt*scrollBar: false
-! URxvt.font: xft:FiraMono:pixelsize=14
-URxvt.font: xft:FantasqueSansMono:pixelsize=16
-XTerm*faceName: FantasqueSansMono:pixelsize=16
+URxvt.font: xft:FantasqueSansMono:pixelsize=17
+XTerm*faceName: FantasqueSansMono:pixelsize=17
 
 ! wombat colors (https://github.com/jackrosenthal/wombat-colors)
 ! #define wb_bg           #1c1c1c
@@ -36,8 +35,7 @@ URxvt*color14:          wb_blue
 URxvt*color15:          white
 
 URxvt*depth: 32
-URxvt*background:       [80]wb_bg
-!URxvt*background:       wb_bg
+URxvt*background:       [80]black
 URxvt*foreground:       wb_fg
 URxvt*cursorColor:      wb_fg
 
@@ -45,17 +43,17 @@ URxvt*intensityStyles:  false
 URxvt*cursorBlink:	1
 
 !! Extensions
-URxvt.perl-ext-common:	default,matcher,resize-font,url-select,keyboard-select
-URxvt.perl-lib:		$HOME/.config/Scripts
-! matcher
-URxvt.url-launcher:	/usr/bin/xdg-open
-URxvt.matcher.button:	1
-! url-select
-URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.url-select.launcher: /usr/bin/xdg-open
-URxvt.url-select.underline: true
-! keyboard-select
-URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.perl-ext-common:	default,resize-font,vtwheel
+URxvt.perl-lib:         /home/richard/.config/urxvt/perl/
 ! resize-font
 URxvt.keysym.C-minus:     resize-font:smaller
 URxvt.keysym.C-plus:      resize-font:bigger
+! change CLIPBOARD interaction
+URxvt.keysym.Shift-Control-Y: eval:paste_primary
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.keysym.Control-Meta-c: builtin-string:
+URxvt.keysym.Control-Meta-v: builtin-string:
+! disable iso14755
+URxvt.iso14755: false
+URxvt.iso14755_52: false
