@@ -67,6 +67,8 @@ st-uninstall:
 
 xkb: $(XKB_LAYOUT) $(XORG_KBD_CONF)
 
+xsynaptics: $(XORG_SYNAPTICS_CONF)
+
 .SECONDEXPANSION:
 
 $(XKB_LAYOUT): $$(notdir $$@)
