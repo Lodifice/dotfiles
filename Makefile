@@ -26,11 +26,11 @@ ST_AUR_REPO = https://aur.archlinux.org/st-git.git
 
 XKB_LAYOUT := /usr/share/X11/xkb/symbols/my_gb
 XORG_KBD_CONF := /etc/X11/xorg.conf.d/00-keyboard.conf
-XORG_SYNAPTICS_CONF := /etc/X11/xorg.conf.d/50-synaptics.conf
+XORG_TOUCHPAD_CONF := /etc/X11/xorg.conf.d/30-touchpad.conf
 
 all: $(LINKS) $(patsubst $(SCRIPTS)%,$(USER_BINARIES)%,$(wildcard $(SCRIPTS)/*)) plugins st-install st-uninstall
 
-.PHONY: all plugins st-install xkb xsynaptics pass-setup mbsync-setup
+.PHONY: all plugins st-install xkb xtouchpad pass-setup mbsync-setup
 
 # TODO switch to ~ before executing and use vpath
 ~/.%:
@@ -67,7 +67,7 @@ st-uninstall:
 
 xkb: $(XKB_LAYOUT) $(XORG_KBD_CONF)
 
-xsynaptics: $(XORG_SYNAPTICS_CONF)
+xtouchpad: $(XORG_TOUCHPAD_CONF)
 
 .SECONDEXPANSION:
 
@@ -77,7 +77,7 @@ $(XKB_LAYOUT): $$(notdir $$@)
 $(XORG_KBD_CONF): $$(notdir $$@)
 	sudo ln -s $(realpath $<) $@
 
-$(XORG_SYNAPTICS_CONF): $$(notdir $$@)
+$(XORG_TOUCHPAD_CONF): $$(notdir $$@)
 	sudo ln -s $(realpath $<) $@
 
 # TODO only execute the recipe if something has actually changed
