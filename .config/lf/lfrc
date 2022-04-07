@@ -6,4 +6,11 @@ cmd open-within %{{
     esac
 }}
 
+cmd say-no ${{
+    echo no >&5
+}}
+
 map <enter> open-within
+
+map Q quit
+map q :say-no; quit

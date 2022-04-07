@@ -1,3 +1,11 @@
+lf () {
+    exec 4>&1
+    d=$($(which lf) -last-dir-path /dev/fd/5 5>&1 >&4-)
+    exec 4>&-
+    [[ $d == no* ]] && return
+    [ "$(pwd)" = "$d" ] || cd "$d"
+}
+
 rtfm () {
     cmd=`history | awk '
     {prevlast=last; last=$0}
