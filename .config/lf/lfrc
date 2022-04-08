@@ -6,11 +6,8 @@ cmd open-within %{{
     esac
 }}
 
-cmd say-no ${{
-    echo no >&5
-}}
-
 map <enter> open-within
 
-map Q quit
-map q :say-no; quit
+map Q :${{ echo $PWD >&${LFCD_DIR_FD} }}; quit
+map q :${{ echo $OLDPWD >&${LFCD_DIR_FD} }}; quit
+

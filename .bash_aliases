@@ -76,9 +76,12 @@ tdoc() {
 }
 
 lf () {
-    exec 4>&1
-    d=$($(which lf) -last-dir-path /dev/fd/5 5>&1 >&4-)
-    exec 4>&-
+    exec {stdin_dup}>&1
+    # TODO it may not be the safest to hardcode 42 here
+    export LFCD_DIR_FD=42
+    # NOTE lf must be built with patch
+    d=$(lf "$@" 42>&1 >&$stdin_dup-)
+    exec {stdin_dup}>&-
     [[ $d == no* ]] && return
     [ "$(pwd)" = "$d" ] || cd "$d"
 }
@@ -96,4 +99,8 @@ rtfm () {
         *)
             man "$cmd";;
     esac
+}
+
+saveq () {
+     curl "$(xclip -o -sel clip)" >/home/richard/offtopic/Q/"$(date +'%y-%m-%d')".gif
 }
