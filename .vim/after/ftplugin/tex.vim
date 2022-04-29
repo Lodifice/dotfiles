@@ -3,10 +3,30 @@
 let g:tex_subscripts='[0-9a-zA-W.,:;+-<>/()=]'
 
 " Text objects for TeX
-vnoremap <silent> i$ :<C-u>normal! T$vt$<CR>
-onoremap <silent> i$ :<C-u>normal! T$vt$<CR>
-vnoremap <silent> a$ :<C-u>normal! F$vf$<CR>
-onoremap <silent> a$ :<C-u>normal! F$vf$<CR>
+function! s:InsideTextObject(delim)
+    let line_until_cursor = getline('.')[0:col('.')-1]
+    return count(line_until_cursor, a:delim) % 2 != 0
+endfunction
+
+" TODO
+" doesn't work if before first text object
+" cursor positions are different from builtins
+" counts
+
+function! s:SelectDelimitedTextObject(delim, inside)
+    let forward = ['f', 't']
+    let backward = ['F', 'T']
+    if <SID>InsideTextObject(a:delim)
+        execute "normal! " . forward[a:inside] . a:delim . "v" . backward[a:inside] . a:delim
+    else
+        execute "normal! " . backward[a:inside] . a:delim . "v" . forward[a:inside] . a:delim
+    endif
+endfunction
+
+vnoremap <silent> i$ :<C-u>call <SID>SelectDelimitedTextObject('$', v:true)<CR>
+onoremap <silent> i$ :<C-u>call <SID>SelectDelimitedTextObject('$', v:true)<CR>
+vnoremap <silent> a$ :<C-u>call <SID>SelectDelimitedTextObject('$', v:false)<CR>
+onoremap <silent> a$ :<C-u>call <SID>SelectDelimitedTextObject('$', v:false)<CR>
 
 " Underscore is not a part of words
 setlocal iskeyword-=_
