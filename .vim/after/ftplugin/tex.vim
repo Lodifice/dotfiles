@@ -13,4 +13,5 @@ setlocal iskeyword-=_
 
 " mzview mappings
 nmap <localleader>s <Plug>mzview_SynctexForward
+nmap <localleader>v <Plug>mzview_SpawnViewer
 nmap <localleader>r <Plug>mzview_RebuildPDF
