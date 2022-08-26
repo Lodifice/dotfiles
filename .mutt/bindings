@@ -1,0 +1,19 @@
+# vim: ft=muttrc
+
+# Movement
+bind index,pager \CE next-line                      # unbinds edit-type
+bind index,pager \CY previous-line
+
+bind attach,browser,index           gg first-entry  # unbinds group-reply
+bind attach,browser,index           G last-entry    # unbinds fetch-mail (POP)
+bind pager                          gg top
+bind pager                          G bottom
+
+# Reply
+bind index,pager                    gr group-reply
+
+# Search
+bind generic,pager                  / search
+bind generic,pager                  ? search-reverse    # unbinds help
+bind generic,pager                  n search-next
+bind generic,pager                  N search-opposite   # unbinds toggle-new, select-new
