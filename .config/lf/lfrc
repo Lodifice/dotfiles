@@ -1,13 +1,22 @@
 cmd open-within %{{
     case $(file --brief --mime-type "$f") in
-        text/*) lf -remote "send $id push e" ;;
-        inode/*) lf -remote "send $id push l" ;;
+        text/*) command lf -remote "send $id push e" ;;
+        inode/*) command lf -remote "send $id push l" ;;
         *) devour xdg-open "$f" ;;
     esac
 }}
 
 map <enter> open-within
+map D delete
+map e $$VISUAL "$f"
 
-map Q :${{ echo $PWD >&${LFCD_DIR_FD} }}; quit
-map q :${{ echo $OLDPWD >&${LFCD_DIR_FD} }}; quit
+# lfcd
+map q %{{
+    command lf -remote "send $id :cd $OLDPWD; quit"
+}}
+map Q quit
 
+set previewer stpv
+set cleaner stpvimgclr
+&stpvimg --listen $id
+cmd on-quit $stpvimg --end $id

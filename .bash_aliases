@@ -76,14 +76,16 @@ tdoc() {
 }
 
 lf () {
-    exec {stdin_dup}>&1
-    # TODO it may not be the safest to hardcode 42 here
-    export LFCD_DIR_FD=42
-    # NOTE lf must be built with patch
-    d=$(lf "$@" 42>&1 >&$stdin_dup-)
-    exec {stdin_dup}>&-
-    [[ $d == no* ]] && return
-    [ "$(pwd)" = "$d" ] || cd "$d"
+    exec {ldp}< <(:)
+    tmp="/dev/fd/${ldp}"
+    command lf --last-dir-path="$tmp" "$@"
+    dir="$(cat "$tmp")"
+    if [ -d "$dir" ]; then
+        if [ "$dir" != "$(pwd)" ]; then
+            cd "$dir"
+        fi
+    fi
+    exec {ldp}<&-
 }
 
 rtfm () {
