@@ -1,5 +1,6 @@
 URxvt*scrollBar: false
 URxvt.font: xft:FantasqueSansMono:pixelsize=17
+URxvt.letterSpace: -1
 XTerm*faceName: FantasqueSansMono:pixelsize=17
 
 ! wombat colors (https://github.com/jackrosenthal/wombat-colors)
