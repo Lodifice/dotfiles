@@ -15,6 +15,9 @@ set menu-complete-display-prefix on
 set show-all-if-ambiguous on
 set skip-completed-text on
 
+# history options
+set revert-all-at-newline on
+
 # style
 set colored-completion-prefix on
 set show-mode-in-prompt on
@@ -27,4 +30,5 @@ Control-a: beginning-of-line
 Control-e: end-of-line
 Control-k: kill-line
 TAB: menu-complete
+"\e[Z": menu-complete-backward
 RET: "\e\n"
