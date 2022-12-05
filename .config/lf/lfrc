@@ -6,6 +6,14 @@ cmd open-within %{{
     esac
 }}
 
+# set window title to current directory
+cmd on-cd &{{
+    printf "\033]0;%s\007" "lf: `dirs +0`" >/dev/tty
+}}
+
+# also run at startup
+on-cd
+
 map <enter> open-within
 map D delete
 map e $$VISUAL "$f"
