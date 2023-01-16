@@ -9,6 +9,9 @@ bind attach,browser,index           G last-entry    # unbinds fetch-mail (POP)
 bind pager                          gg top
 bind pager                          G bottom
 
+macro index . "<sidebar-next-new><sidebar-open>"    # unbinds buffy-list
+macro index , "<sidebar-prev-new><sidebar-open>"
+
 # Reply
 bind index,pager                    gr group-reply
 
