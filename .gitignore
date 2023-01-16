@@ -5,3 +5,6 @@
 .mutt/aliases
 pass-systemd/mbsync.service
 passinit
+.vim/bundle/
+.vim/.netrwhist
+.vim/spell
