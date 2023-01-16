@@ -2,8 +2,8 @@
 
 [ -z "$PAPERSDIR" ] && PAPERSDIR="$HOME/papers"
 
-#python <(sed 1,10d $0) < "$PAPERSDIR"/db.bib | dmenu -i -l 10 | cut -f1 | xargs -I{} xdg-open "$PAPERSDIR/{}.pdf"
-python <(sed 1,10d $0) < "$PAPERSDIR"/db.bib | rofi -dmenu -i | cut -f1 | xargs -I{} xdg-open "$PAPERSDIR/{}.pdf"
+python <(sed 1,10d $0) < "$PAPERSDIR"/db.bib | dmenu -i -l 10 | cut -f1 -d' ' | xargs -I{} xdg-open "$PAPERSDIR/{}.pdf"
+#python <(sed 1,10d $0) < "$PAPERSDIR"/db.bib | rofi -dmenu -i | cut -f1 | xargs -I{} xdg-open "$PAPERSDIR/{}.pdf"
 
 exit
 
@@ -14,5 +14,14 @@ import bibtexparser
 
 bibtex = sys.stdin.read()
 bibliography = bibtexparser.loads(bibtex)
+id_len, title_len, author_len = (max(len(entry["ID"]) for entry in bibliography.entries),
+                                 max(len(entry["title"]) for entry in bibliography.entries),
+                                 max(len(entry["author"]) for entry in bibliography.entries))
 for entry in bibliography.entries:
-    print(entry["ID"], entry["title"], entry["author"], entry["year"], sep='\t')
+    print(entry["ID"],
+          (4 + id_len - len(entry["ID"])) * ' ',
+          entry["title"],
+          (4 + title_len - len(entry["title"])) * ' ',
+          entry["author"],
+          (4 + author_len - len(entry["author"])) * ' ',
+          entry["year"], sep="")
