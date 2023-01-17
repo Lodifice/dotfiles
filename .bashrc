@@ -20,6 +20,9 @@ function PreCommand() {
     if [ -z "$AT_PROMPT" ]; then
         return
     fi
+    if [[ "$BASH_COMMAND" = "__fzf_"* ]]; then
+        return
+    fi
     unset AT_PROMPT
 
     # Do stuff.
@@ -37,3 +40,9 @@ function PostCommand() {
     printf "\033]0;%s\007" "${shell_name}: `dirs +0`"
 }
 PROMPT_COMMAND="PostCommand"
+
+. /usr/share/fzf/key-bindings.bash
+for f in .config/bash/?*.bash
+do
+    [ -f "$f" ] && . "$f"
+done
