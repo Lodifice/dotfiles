@@ -41,12 +41,12 @@ __fzf_rebind_ctrl_x_ctrl_p__() {
     bind '"\C-x\C-p": ""'
   elif test "${READLINE_LINE: -${#__fzf_exec_suffix__}}" = "$__fzf_exec_suffix__"; then
     READLINE_LINE=${READLINE_LINE:0:-${#__fzf_exec_suffix__}}
-    bind '"\C-x\C-p": accept-line'
+    bind '"\C-x\C-p": "\C-m"'
   fi
 }
 
 __fzf_history_save_readline_line() {
-    __fzf_old_readline_line="$READLINE_LINE"
+  __fzf_old_readline_line="$READLINE_LINE"
 }
 
 bind '"\C-x\C-p": ""'
