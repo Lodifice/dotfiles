@@ -42,7 +42,8 @@ function PostCommand() {
 PROMPT_COMMAND="PostCommand"
 
 . /usr/share/fzf/key-bindings.bash
-for f in .config/bash/?*.bash
+for f in "$(systemd-path user-configuration)"/bash/?*.bash
 do
     [ -f "$f" ] && . "$f"
 done
+unset f
