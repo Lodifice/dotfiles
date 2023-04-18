@@ -59,7 +59,7 @@ setlocal iskeyword-=_
 
 " mzview mappings
 nmap <localleader>s <Plug>mzview_SynctexForward
-nmap <localleader>v <Plug>mzview_SpawnViewer
+nmap <localleader>v <Plug>mzview_SpawnViewer :set background=light<CR>
 nmap <localleader>r <Plug>mzview_RebuildPDF
 
 " section movement
