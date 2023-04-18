@@ -61,3 +61,22 @@ setlocal iskeyword-=_
 nmap <localleader>s <Plug>mzview_SynctexForward
 nmap <localleader>v <Plug>mzview_SpawnViewer
 nmap <localleader>r <Plug>mzview_RebuildPDF
+
+" section movement
+let s:re_sec = '\v^\s*\\%(' . join([
+      \   '%(sub)?paragraph',
+      \   '%(sub)*section',
+      \   'chapter',
+      \   'part',
+      \   'appendi%(x|ces)',
+      \   '%(front|back|main)matter',
+      \   'add%(sec|chap|part)',
+      \ ], '|') . ')>'
+
+function! s:MoveLatexSection(direction)
+    let match = search(s:re_sec, 'sW' . a:direction)
+    " TODO move to start/end if there is no match
+endfunction
+
+nnoremap <silent> ][ :call <SID>MoveLatexSection('')<CR>
+nnoremap <silent> [[ :call <SID>MoveLatexSection('b')<CR>
