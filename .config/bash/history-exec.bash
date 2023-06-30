@@ -60,5 +60,5 @@ else
   bind '"\C-x\C-e": shell-expand-line'
   bind '"\C-x\C-r": redraw-current-line'
   bind '"\C-x^": history-expand-line'
-  bind '"\C-r": "\C-x\C-i\C-x\C-addi`__fzf_history__`\C-x\C-e\C-x\C-r\C-x^\C-x\C-a$a\C-x\C-o\C-x\C-p"'
+  bind -m vi-insert '"\C-r": "\C-x\C-i\C-x\C-addi`__fzf_history__`\C-x\C-e\C-x\C-r\C-x^\C-x\C-a$a\C-x\C-o\C-x\C-p"'
 fi
