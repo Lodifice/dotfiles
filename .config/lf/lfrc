@@ -6,6 +6,30 @@ cmd open-within %{{
     esac
 }}
 
+# navigate like nnn or fmz
+set incfilter
+# https://github.com/gokcehan/lf/issues/1082#issuecomment-1590424792
+map f :filter; set user_filter true
+
+cmap <enter> &{{
+    if [ "$lf_user_filter" = true ]; then
+        case $(file --brief --mime-type "$f") in
+            inode/*) command lf -remote "send $id :cmd-enter; open; filter" ;;
+            *) command lf -remote "send $id :cmd-enter; set user_filter false; setfilter; open-within" ;;
+        esac
+    else
+        command lf -remote "send $id cmd-enter"
+    fi
+}}
+
+cmap <esc> &{{
+    if [ "$lf_user_filter" = true ]; then
+        command lf -remote "send $id :cmd-escape; set user_filter false"
+    else
+        command lf -remote "send $id cmd-escape"
+    fi
+}}
+
 # set window title to current directory
 cmd on-cd &{{
     printf "\033]0;%s\007" "lf: `dirs +0`" >/dev/tty
