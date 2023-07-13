@@ -14,7 +14,7 @@ map f :filter; set user_filter true
 cmap <enter> &{{
     if [ "$lf_user_filter" = true ]; then
         case $(file --brief --mime-type "$f") in
-            inode/*) command lf -remote "send $id :cmd-enter; open; filter" ;;
+            inode/*) command lf -remote "send $id :cmd-enter; setfilter; open; filter" ;;
             *) command lf -remote "send $id :cmd-enter; set user_filter false; setfilter; open-within" ;;
         esac
     else
