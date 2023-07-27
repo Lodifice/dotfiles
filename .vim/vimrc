@@ -106,6 +106,9 @@ augroup guillotine
     autocmd!
     autocmd BufEnter * if exists(":ToggleHeaderSource") | execute "nmap <buffer> ga :ToggleHeaderSource<cr>" | endif
 augroup END
+" zettelkasten {{{2
+let g:zettelkasten = "/home/richard/Dokumente/Zettelkasten/"
+let g:indexzettel = "202307271045.md"
 
 augroup diffmode
     autocmd!
