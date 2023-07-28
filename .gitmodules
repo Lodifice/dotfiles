@@ -1,0 +1,6 @@
+[submodule ".vim/pack/notetaking/start/zettelkasten"]
+	path = .vim/pack/notetaking/start/zettelkasten
+	url = git@github.com:Lodifice/zettelkasten.vim.git
+[submodule ".vim/pack/notetaking/start/markdown"]
+	path = .vim/pack/notetaking/start/markdown
+	url = git@github.com:Lodifice/markdown.vim.git
