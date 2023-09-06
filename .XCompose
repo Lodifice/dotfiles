@@ -220,6 +220,7 @@ include "%L"
 <Multi_key> <S> <F>                         : "ℱ" U2131 # \mathcal{F}       # SCRIPT CAPITAL F
 <Multi_key> <S> <M>                         : "ℳ" U2133 # \mathcal{M}       # SCRIPT CAPITAL M
 <Multi_key> <S> <o>                         : "ℴ" U2134 # \mathcal{o}       # SCRIPT SMALL O
+<Multi_key> <S> <A>                         : "𝒜" U1D49C # \mathcal{A}      # MATHEMATICAL SCRIPT CAPITAL A
 #
 #
 # Mathematical Symbols/Number Forms
