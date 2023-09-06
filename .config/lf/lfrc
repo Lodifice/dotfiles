@@ -30,6 +30,14 @@ cmap <esc> &{{
     fi
 }}
 
+cmap <c-l> &{{
+    if [ "$lf_user_filter" = true ]; then
+        command lf -remote "send $id cd .."
+    else
+        command lf -remote "send $id redraw"
+    fi
+}}
+
 # set window title to current directory
 cmd on-cd &{{
     printf "\033]0;%s\007" "lf: `dirs +0`" >/dev/tty
