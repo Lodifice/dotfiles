@@ -1,7 +1,0 @@
-# vim: ft=sudoers
-Cmnd_Alias SYNC = /usr/bin/mbsync, /usr/bin/vdirsyncer
-Defaults!SYNC closefrom_override
-Defaults!SYNC env_keep += "PASS_FD_*"
-gpg ALL=(ALL) NOPASSWD: SYNC
-gpg ALL=(ALL) NOPASSWD: /usr/bin/pass
-richard ALL=(ALL) NOPASSWD: /usr/local/bin/passinit

@@ -1,9 +1,0 @@
-[Unit]
-Description=passinit service
-
-[Service]
-Type=oneshot
-ExecStart=sudo -u gpg passinit
-
-[Install]
-WantedBy=xsession.target
