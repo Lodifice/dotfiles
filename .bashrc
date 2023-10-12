@@ -41,9 +41,12 @@ function PostCommand() {
 }
 PROMPT_COMMAND="PostCommand"
 
+FZF_DEFAULT_OPTS="--layout=reverse"
 . /usr/share/fzf/key-bindings.bash
 for f in "$(systemd-path user-configuration)"/bash/?*.bash
 do
     [ -f "$f" ] && . "$f"
 done
 unset f
+# wtf?
+bind -m vi-insert -x '"\C-t": fzf-file-widget'
