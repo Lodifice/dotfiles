@@ -106,3 +106,7 @@ rtfm () {
 saveq () {
      curl "$(xclip -o -sel clip)" >/home/richard/offtopic/Q/"$(date +'%y-%m-%d')".gif
 }
+
+dpdf () {
+    curl -L "$1" | zathura - & disown %+
+}
