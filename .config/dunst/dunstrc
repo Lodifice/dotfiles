@@ -341,8 +341,8 @@
     #background = "#285577"
     background = "#000000C0"
     frame_color = "#A5C7FF"  # winter
-    #frame_color = "#5DA9F6"  # winter
-    frame_color = "#DCF88F"  # spring
+    frame_color = "#5DA9F6"  # winter
+    f#rame_color = "#DCF88F"  # spring
     foreground = "#ffffff"
     timeout = 10
     # Icon for notifications with normal urgency, uncomment to enable
