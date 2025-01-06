@@ -6,9 +6,22 @@ color normal default default
 mono indicator reverse
 color prompt bold default default
 color search default default
-color status brightblack lightblue
-color status bold reverse lightblue default
+color status brightblack lightblue # ???
+color status bold reverse lightgreen default # spring
+color status bold reverse color103 default # autumn, not good
+color status bold reverse lightblue default # winter
 
+# spring
+color hdrdefault lightgreen default
+color quoted lightgreen default
+color signature lightgreen default
+
+# autumn, not good
+color hdrdefault color103 default
+color quoted color103 default
+color signature color103 default
+
+# winter
 color hdrdefault lightblue default
 color quoted lightblue default
 color signature lightblue default
@@ -20,7 +33,12 @@ color tree white default
 color markers red default
 color tilde brightmagenta default
 color index blue black ~F
+# summer
 color index red default "~N|~O"
+# winter
+color index bold lightblue default "~N|~O"
+# all
+color index bold default default "~N|~O"
 
 # color body brightwhite black '\*+[^*]+\*+'
 # color body brightwhite black '_+[^_]+_+'
