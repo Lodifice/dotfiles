@@ -107,6 +107,13 @@ saveq () {
      curl "$(xclip -o -sel clip)" >/home/richard/offtopic/Q/"$(date +'%y-%m-%d')".gif
 }
 
+krass() {
+    [ "$#" -ne 1 ] && return 1
+    KRASSPATH=~/offtopic/krass
+    cat "${KRASSPATH}/$1" 2>/dev/null
+    cat >> "${KRASSPATH}/$1"
+}
+
 dpdf () {
     curl -L "$1" | zathura - & disown %+
 }
