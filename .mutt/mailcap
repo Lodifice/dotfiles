@@ -2,7 +2,7 @@ text/html; w3m -I %{charset} -T %t; copiousoutput;
 message/rfc822; view -Mf %s; edit=vim -f %s; compose=vim -f %s; needsterminal;
 application/pdf; mutt_bgrun zathura %s;
 application/msword; mutt_bgrun libreoffice %s;
-application/vnd.*; mutt_bgrun libreoffice %s;
+application/vnd.oasis.opendocument.spreadsheet; mutt_bgrun libreoffice %s;
 application/vnd.oasis.opendocument.text; mutt_bgrun libreoffice %s;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; mutt_bgrun libreoffice %s;
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; mutt_bgrun libreoffice %s;
