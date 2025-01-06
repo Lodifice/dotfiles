@@ -12,6 +12,7 @@ alias systemstrg=systemctl
 
 HISTSIZE=
 HISTFILESIZE=
+HISTCONTROL=ignorespace
 
 PS1='[\u@\h \W]\$ '
 # FROM https://jichu4n.com/posts/debug-trap-and-prompt_command-in-bash/
