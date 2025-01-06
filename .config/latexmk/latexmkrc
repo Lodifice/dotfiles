@@ -14,6 +14,6 @@ push @generated_exts, 'glo', 'gls', 'glg';
 push @generated_exts, 'acn', 'acr', 'alg';
 $clean_ext .= ' %R.ist %R.xdy';
 
-$pdflatex = 'lualatex -synctex=1  %O %S';
+$pdflatex = 'pdflatex -synctex=1  %O %S';
 $pdf_mode = 1;
 $postscript_mode = $dvi_mode = 0;
