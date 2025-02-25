@@ -1,0 +1,31 @@
+[diff]
+	tool = vimdiff
+	algorithm = histogram
+	renames = true
+	mnemonicPrefix = true
+	colorMoved = plain
+[user]
+	email = richard.moerbitz@tu-dresden.de
+	name = Richard Mörbitz
+[pull]
+	ff = only
+[init]
+	defaultBranch = master
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge --skip -- %f
+	process = git-lfs filter-process --skip
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[help]
+	autocorrect = prompt
+[commit]
+	verbose = true
+[rerere]
+	enabled = true
+	autoupdate = true
