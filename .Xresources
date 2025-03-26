@@ -48,7 +48,7 @@ URxvt*intensityStyles:  true
 URxvt*cursorBlink:	1
 
 !! Extensions
-URxvt.perl-ext-common:	default,resize-font,vtwheel
+URxvt.perl-ext-common:	default,resize-font,vtwheel,matcher
 URxvt.perl-lib:         /home/richard/.config/urxvt/perl/
 ! resize-font
 URxvt.keysym.C-minus:     resize-font:smaller
@@ -62,3 +62,7 @@ URxvt.keysym.Control-Meta-v: builtin-string:
 ! disable iso14755
 URxvt.iso14755: false
 URxvt.iso14755_52: false
+! Clickable URLs
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.matcher.rend.0: Uline Bold fg4
