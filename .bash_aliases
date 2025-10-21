@@ -33,6 +33,10 @@ alias mensa='w3m lucas-vogel.de/mensa'
 # fix commands that change and become broken
 alias pdfbook='pdfbook2 --paper=a4paper --no-crop'
 
+# Zettelkasten interaction
+alias zetk='vim +Zettelkasten'
+alias nzet='vim +NewZettel'
+
 # stolen from http://stackoverflow.com/questions/1527049/join-elements-of-an-array
 join_by() {
     local IFS="$1"; shift; echo "$*";
