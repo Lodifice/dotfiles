@@ -7,13 +7,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri.url = "github:sodiboo/niri-flake/97876f35dcd5";
+    #niri.url = "github:sodiboo/niri-flake/97876f35dcd5";
+    #niri.url = "github:sodiboo/niri-flake";
     #niri.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = {
     nixpkgs,
     home-manager,
-    niri,
     ...
   }: let
     # system = "aarch64-linux"; If you are running on ARM powered computer
@@ -26,7 +26,7 @@
         modules = [
           ./home.nix
           #./niri.nix
-          niri.homeModules.niri
+          #niri.homeModules.niri
         ];
       };
     };
