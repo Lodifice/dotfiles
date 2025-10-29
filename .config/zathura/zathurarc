@@ -1,3 +1,0 @@
-set guioptions ""
-set incremental-search true
-set database "sqlite"
