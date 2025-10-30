@@ -1,13 +1,6 @@
-{ inputs, pkgs, lib, config, ... }:
+{ config, pkgs, lib, nixGL, ... }:
 
 {
-  imports = [
-
-    #inputs.niri.homeModules.niri
-
-    #inputs.dankMaterialShell.homeModules.dankMaterialShell.niri
-
-  ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "richard";
@@ -27,13 +20,12 @@
   home.packages = [
     pkgs.toilet
     pkgs.neofetch
-    pkgs.niri
+    (config.lib.nixGL.wrap pkgs.niri)
     pkgs.alacritty
     pkgs.xwayland-satellite
     pkgs.libgbm
     pkgs.mesa
     pkgs.libdrm
-    #(xwayland-satellite.override { withSystemd = false; }) # Niri automatically runs this when xwayland support is required
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -97,19 +89,8 @@
       default-bg = "#FFFFFF";
     };
   };
-  #programs.niri.enable = true;
-  #programs.niri.package = lib.mkForce pkgs.niri;
-  #programs.niri.settings = {
-  #  outputs."eDP-1".mode = {
-  #    width = 1920;
-  #    height = 1080;
-  #  };
-  #};
-  #programs.dankMaterialShell = {
-  #  niri = {
-  #    enableKeybinds = true;
-  #    enableSpawn = true;
-  #  };
-  #};
+  nixGL.packages = nixGL.packages;
+  nixGL.defaultWrapper = "mesa";
+  nixGL.installScripts = [ "mesa" ];
 }
 # vim: shiftwidth=2 softtabstop=2
