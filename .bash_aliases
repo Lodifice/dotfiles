@@ -121,3 +121,13 @@ krass() {
 dpdf () {
     curl -L "$1" | zathura - & disown %+
 }
+
+# TODO accelerate! C?
+
+fcd () {
+    history | grep '^[[:digit:]]\+[[:blank:]]\+cd' | while read cmd; do target=$(echo "$cmd" | awk '{print $3}'); [ -d "$target" ] && echo "$cmd"; done | tac | fzf
+}
+
+fcd2 () {
+    history | grep '^[[:digit:]]\+[[:blank:]]\+cd' | awk '{ $1=""; print }' | sort -u | while read cmd; do target=$(echo "$cmd" | awk '{print $2}'); [ -d "$target" ] && echo "$cmd"; done | tac | fzf
+}
