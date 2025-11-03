@@ -564,5 +564,6 @@
         '';
     };
   };
+  targets.genericLinux.enable = true;
 }
 # vim: shiftwidth=2 softtabstop=2
