@@ -1,0 +1,7 @@
+set muttlisp_inline_eval
+set my_column = "2"
+macro index h '<enter-command>set my_column = "1"<enter>'
+macro index j '<enter-command>exec (if (equal $my_column "1") sidebar-next next-undeleted)<enter>'  "bla"
+macro index k '<enter-command>exec (if (equal $my_column "1") sidebar-prev previous-undeleted)<enter>'  "blubb"
+#macro index k '<run>(if (equal $my_column "1") <sidebar-prev> <previous-undeleted>)'  "blubb"
+macro index l '<enter-command>run (if (equal $my_column "1") (quote set my_column = "2") (quote exec limit))<enter>'

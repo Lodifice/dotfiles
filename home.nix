@@ -30,7 +30,9 @@
     # packages with configuration files just copied by by Home Manager
     # (at least for the time being)
     pkgs.lf
+    pkgs.mutt
     pkgs.todoman
+    pkgs.rxvt-unicode-unwrapped-emoji
 
     # fonts
     pkgs.nerd-fonts.fantasque-sans-mono
@@ -68,6 +70,10 @@
   xdg.configFile = {
     "latexmk/latexmkrc".source = config/latexmk/latexmkrc;
     "lf/lfrc".source = config/lf/lfrc;
+    "mutt/bindings".source = config/mutt/bindings;
+    "mutt/colors.transparent".source = config/mutt/colors.transparent;
+    "mutt/mailcap".source = config/mutt/mailcap;
+    "mutt/muttlisp".source = config/mutt/muttlisp;
     "readline/inputrc".source = config/readline/inputrc;
     "tmux/tmux.conf".source = config/tmux/tmux.conf;
     "todoman/config.py".source = config/todoman/config.py;
@@ -97,6 +103,7 @@
     PAPERSDIR = "${config.home.homeDirectory}/forschung/literatur";
     PYTHON_BASIC_REPL = 1;
     EXECIGNORE = "/usr/bin/latexminted";
+    XDG_CONFIG_HOME = "${config.xdg.configHome}";
   };
 
   # Let Home Manager install and manage itself.

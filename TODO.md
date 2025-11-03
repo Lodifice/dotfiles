@@ -1,10 +1,5 @@
 # TODO for nix migration
 
-- .mutt/bindings
-- .mutt/colors.default
-- .mutt/colors.linux
-- .mutt/colors.transparent
-- .mutt/mailcap
 - .vim/after/ftplugin/mail.vim
 - .vim/after/ftplugin/tex.vim
 - .vim/after/syntax/tex.vim
@@ -36,3 +31,4 @@
 # Untracked stuff
 
 - gpgsm.conf and all keys
+- muttrc, all accounts, aliases, filter
