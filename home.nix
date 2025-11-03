@@ -21,7 +21,7 @@
     pkgs.toilet
     pkgs.neofetch
     (config.lib.nixGL.wrap pkgs.niri)
-    pkgs.alacritty
+    pkgs.foot
     pkgs.xwayland-satellite
     pkgs.libgbm
     pkgs.mesa
