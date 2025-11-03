@@ -20,13 +20,15 @@ Plugin 'lodifice/guillotine.vim'
 Plugin 'lodifice/omnitags.vim'
 Plugin 'lodifice/panzer.vim'
 Plugin 'lodifice/pathfinder.vim'
-"Plugin 'michalbachowski/vim-wombat256mod'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-speeddating'
 Plugin 'lodifice/wombat256.vim'
 Plugin 'miyakogi/seiya.vim'
 Plugin 'lodifice/mzview.vim'
 Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'ekmett/haskell-vim'
+Plugin 'rydama/desert-light.vim'
+Plugin 'natebosch/vim-lsc'
 Plugin 'junegunn/fzf'
 
 call vundle#end()
@@ -42,19 +44,21 @@ set noswapfile
 
 " Sanity defaults {{{2
 set clipboard=      " Welches Rindvieh hat `autoselect` als Default eingestellt?
+autocmd VimResized * wincmd =
+set isfname-==      " Better file navigation in configs
 
 " Tabs and spaces {{{2
 set expandtab       " expand tabs to spaces
 set softtabstop=4   " each tab is 4 spaces
 set shiftwidth=4    " use 4 spaces for each indent level
 set shiftround      " orientate indent on shiftwidth
-"
+
 " Search {{{2
 set hlsearch        " always highlight search results
 set incsearch       " search incrementally
 set ignorecase      " ignore case when searching
 set smartcase       " ignore ignorecase when uppercase letter in search string
-"
+
 " History & undo levels {{{2
 set history=777     " command line history
 set undolevels=777  " normal mode history
@@ -65,6 +69,8 @@ set hidden          " Make it possible to switch buffers without writing
 " Command line completion {{{2
 set wildmenu                    " Show possible completions
 set wildmode=longest:full,full  " Make completion behave like in zsh
+                                " try: list:full
+set wildignorecase
 
 " Visuals {{{1
 " Orientation {{{2
@@ -87,6 +93,12 @@ let &t_SR = "\e[3 q"
 let &t_EI = "\e[1 q"
 set ttimeout
 set ttimeoutlen=100
+set background=dark
+if &term == "st-256color" || exists('$TMUX')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+set termguicolors
 color wombat256mod
 
 " Font {{{2
@@ -94,11 +106,21 @@ set guifont="Fantasque Sans Mono 12"
 
 " Mappings {{{1
 " Remove search highlighting
-nnoremap <Esc> :nohlsearch<cr>
+nnoremap <esc><esc> :nohlsearch<cr>
+nnoremap <leader>n /«++»<cr>cgn
 " Filetype detection
 nnoremap <leader>f :filetype detect<cr>
 " Sanitize comments in HTML e-mails
 nnoremap <leader>c <esc>:'<,'>s/^> //<cr>:'<,'>!w3m -T text/html -I UTF-8<cr>
+" Navigation
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> ]q :cnext<CR>
+nnoremap <silent> [l :lprevious<CR>
+nnoremap <silent> ]l :lnext<CR>
+" Debug highlightings
+nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Plugin configuration {{{1
 " Guillotine {{{2
@@ -106,6 +128,8 @@ augroup guillotine
     autocmd!
     autocmd BufEnter * if exists(":ToggleHeaderSource") | execute "nmap <buffer> ga :ToggleHeaderSource<cr>" | endif
 augroup END
+" vim-orgmode {{{2
+let g:org_todo_keywords=['TODO', '|', 'DONE', 'WAITING']
 " zettelkasten {{{2
 let g:zettelkasten = "/home/richard/.local/share/Zettelkasten/"
 let g:indexzettel = "202307271045.md"
@@ -115,3 +139,41 @@ augroup diffmode
     autocmd OptionSet diff let &cursorline=!v:option_new
     autocmd BufEnter * if !&diff | let &cursorline=1 |endif
 augroup END
+
+let g:lsc_server_commands = {
+ \  'python': '/home/richard/software/python-language-server/venv/bin/pylsp',
+ \  'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
+ \      using LanguageServer;
+ \      using Pkg;
+ \      import StaticLint;
+ \      import SymbolServer;
+ \      env_path = dirname(Pkg.Types.Context().env.project_file);
+ \
+ \      server = LanguageServer.LanguageServerInstance(stdin, stdout, env_path, "");
+ \      server.runlinter = true;
+ \      run(server);
+ \  ']
+ \}
+" \  'tex': {
+" \      'command': 'ltex-ls',
+" \      'languageId': 'latex',
+" \      'suppress_stderr': v:true,
+" \  },
+
+let g:lsc_auto_map = {
+ \  'GoToDefinition': 'gd',
+ \  'FindReferences': 'gr',
+ \  'Rename': 'gR',
+ \  'ShowHover': v:true,
+ \  'FindCodeActions': 'ga',
+ \  'Completion': 'omnifunc',
+ \}
+let g:lsc_enable_autocomplete  = v:false
+let g:lsc_enable_diagnostics   = v:true
+let g:lsc_reference_highlights = v:false
+let g:lsc_trace_level          = "verbose"
+
+" Make :grep use ripgrep
+if executable('rg')
+    set grepprg=rg\ --color=never\ --vimgrep
+endif
