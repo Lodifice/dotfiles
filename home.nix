@@ -27,7 +27,7 @@
     pkgs.mesa
     pkgs.libdrm
 
-    # packages with configuration files just copied by by Home Manager
+    # packages with configuration files just copied by Home Manager
     # (at least for the time being)
     pkgs.lf
     pkgs.mutt
@@ -49,6 +49,13 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    (pkgs.writeShellScriptBin "docs" ''
+      [ -z "$DOCSDIR" ] && DOCSDIR="$HOME/docs/"
+      ls "$DOCSDIR" | dmenu | xargs -I{} xdg-open "$DOCSDIR/{}"
+    '')
+    (pkgs.writeScriptBin "mutt_bgrun" (builtins.readFile ./bin/mutt_bgrun))
+    (pkgs.writeScriptBin "papers" (builtins.readFile ./bin/papers))
+    (pkgs.writeScriptBin "pinentry-switch" (builtins.readFile ./bin/pinentry-switch))
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

@@ -6,11 +6,6 @@
 - .vim/pack/notetaking/start/markdown
 - .vim/pack/notetaking/start/zettelkasten
 - .vim/vimrc
-- bin/docs
-- bin/mailsync
-- bin/mutt_bgrun
-- bin/papers
-- bin/pinentry-switch
 
 # Xorg stuff that needs replacement
 
@@ -32,3 +27,5 @@
 
 - gpgsm.conf and all keys
 - muttrc, all accounts, aliases, filter
+- mbsync, msmtp
+- see git status :)
