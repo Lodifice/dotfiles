@@ -1,9 +1,5 @@
 # TODO for nix migration
 
-- .bash_aliases
-- .bash_profile
-- .bashrc
-- .config/bash/history-exec.bash
 - .mutt/bindings
 - .mutt/colors.default
 - .mutt/colors.linux
