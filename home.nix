@@ -15,6 +15,11 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
+  nix.package = pkgs.nix;
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+  };
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
@@ -38,7 +43,7 @@
     pkgs.nerd-fonts.fantasque-sans-mono
 
     # work only packages
-    eduvpn-client
+    pkgs.eduvpn-client
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -87,6 +92,51 @@
     "readline/inputrc".source = config/readline/inputrc;
     "tmux/tmux.conf".source = config/tmux/tmux.conf;
     "todoman/config.py".source = config/todoman/config.py;
+  };
+
+  # Mime information
+  xdg.mimeApps = {
+    enable = true;
+    associations.added = {
+      "application/pdf" = [ "gimp.desktop" "org.pwmt.zathura.desktop" "org.gnome.Evince.desktop" ];
+      "application/x-gzip" = [ "gvim.desktop" ];
+      "application/x-bibtex" = [ "gvim.desktop" ];
+      "text/x-tex" = [ "gvim.desktop" ];
+      "text/rust" = [ "gvim.desktop" "org.gnome.gedit.desktop" ];
+      "text/x-python" = [ "gvim.desktop" ];
+      "text/calendar" = [ "gvim.desktop" ];
+      "application/postscript" = [ "org.pwmt.zathura-ps.desktop" ];
+      "application/octet-stream" = [ "chromium.desktop" "gvim.desktop" "sxiv.desktop" ];
+      "text/plain" = [ "gvim.desktop" ];
+      "image/jpeg" = [ "sxiv.desktop" "gimp.desktop" ];
+      "application/zip" = [ "gvim.desktop" ];
+      "image/webp" = [ "chromium.desktop" ];
+      "x-scheme-handler/tg" = [ "userapp-Telegram Desktop-ZM8SS0.desktop" "userapp-Telegram Desktop-J2PVW0.desktop" "userapp-Telegram Desktop-J7WK41.desktop" "org.telegram.desktop.desktop" ];
+      "text/html" = [ "firefox.desktop" ];
+      "image/png" = [ "sxiv.desktop" ];
+      "application/x-tar" = [ "gvim.desktop" ];
+      "text/x-go" = [ "gvim.desktop" ];
+      "x-scheme-handler/tonsite" = [ "org.telegram.desktop.desktop" ];
+    };
+    defaultApplicationPackages = [
+      pkgs.zathura
+    ];
+    defaultApplications = {
+      "x-scheme-handler/tg" = [ "org.telegram.desktop.desktop" ];
+      "image/png" = [ "sxiv.desktop" ];
+      "x-scheme-handler/http" = [ "brave-browser.desktop" ];
+      "x-scheme-handler/https" = [ "brave-browser.desktop" ];
+      "image/jpg" = [ "sxiv.desktop" ];
+      "text/html" = [ "brave-browser.desktop" ];
+      "x-scheme-handler/about" = [ "brave-browser.desktop" ];
+      "x-scheme-handler/unknown" = [ "brave-browser.desktop" ];
+      "text/*" = [ "leafpad.desktop" ];
+      "text/x-c" = [ "leafpad.desktop" ];
+      "text/x-c++" = [ "leafpad.desktop" ];
+      "x-scheme-handler/tonsite" = [ "org.telegram.desktop.desktop" ];
+      "image/jpeg" = [ "sxiv.desktop" ];
+      "text/rust" = [ "org.gnome.gedit.desktop" ];
+    };
   };
 
   # Home Manager can also manage your environment variables through
@@ -404,6 +454,15 @@
         enabled = true;
         autoupdate = true;
       };
+    };
+  };
+  programs.rofi = {
+    enable = true;
+    plugins = [ pkgs.rofi-calc ];
+    modes = [ "window" "drun" "calc" ];
+    pass = {
+      enable = true;
+      stores = [ "${config.home.homeDirectory}/.password-store" ];
     };
   };
   programs.zathura = {

@@ -8,6 +8,10 @@ synchronization between my machines.
   The special target for st will download the PKGBUILD from the AUR, clone
   the st repository, apply my and some other patches, build the package and
   finally install it.
+* Setup with Nix
+  Unfortunately, keyboard configuration is cursed and requires `make xkb` or probably better `make XKB_LAYOUT` and ` localectl set-x11-keymap my_gb pc105 swapyz "caps:escape,compose:menu"` – the latter can be skipped if the keyboard should be configured in niri instead
+  - first run: `nix run --extra-experimental-features nix-command --extra-experimental-features flakes -- home-manager --extra-experimental-features nix-command --extra-experimental-features flakes switch --flake .#$USER`
+  - all subsequent runs: `home-manager switch --flake .#$USER`
 * Contribution
   These are MY dotfiles.  I use this repository as a PERSONAL backup and for
   synchronization between MY machines.

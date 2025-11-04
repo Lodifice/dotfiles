@@ -31,16 +31,13 @@
 - muttrc, all accounts, aliases, filter
 - mbsync, msmtp
 - Inhibit-Setup
-- Rest unter .config
-- GOPATH=/home/richard/.local/share/go – geht das auch per Environment?
-- khal
-- mpd
-- script-opts=ytdl_hook-ytdl_path=yt-dlp d.h. auch ytdlp
-- nix.conf: experimental-features = nix-command flakes
-- qutebrowser maybe
-- rofi
-- vdirsyncer
-- wireplumber/policy.lua.d/11-bluetooth-policy.lua: bluetooth_policy.policy["media-role.use-headset-profile"] = false
-- yt-x
-- ytfzf
-- mimeapps.list
+- Rest unter .config:
+    - GOPATH=/home/richard/.local/share/go – geht das auch per Environment?
+    - khal
+    - mpd
+    - mpv: script-opts=ytdl_hook-ytdl_path=yt-dlp d.h. auch ytdlp
+    - qutebrowser maybe
+    - vdirsyncer
+    - wireplumber/policy.lua.d/11-bluetooth-policy.lua: bluetooth_policy.policy["media-role.use-headset-profile"] = false
+    - yt-x
+    - ytfzf
