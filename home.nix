@@ -38,6 +38,8 @@
     pkgs.mutt
     pkgs.todoman
     pkgs.rxvt-unicode-unwrapped-emoji
+    # I list Vim in this category although I still configure it via symlinks
+    pkgs.vim
 
     # fonts
     pkgs.nerd-fonts.fantasque-sans-mono
