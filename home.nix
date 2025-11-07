@@ -844,7 +844,45 @@
     pinentry.package = pkgs.pinentry-all;
     extraConfig = ''
       allow-loopback-pinentry
-    '';
+      '';
+  };
+  services.kanshi = {
+    enable = true;
+    settings = [
+      {
+	output.criteria = "eDP-1";
+	output.alias = "internal";
+      }
+      {
+	output.criteria = "Dell Inc. DELL U2715H GH85D7B225PS";
+	output.alias = "workLeft";
+      }
+      {
+	output.criteria = "Dell Inc. DELL U2415 7MT017AU09MS";
+	output.alias = "workRight";
+	output.transform = "90";
+      }
+      {
+	profile.name = "docked";
+	profile.outputs = [
+	  {
+	    criteria = "$internal";
+	    status = "enable";
+	    position = "0,0";
+	  }
+	  {
+	    criteria = "$workLeft";
+	    status = "enable";
+	    position = "1920,0";
+	  }
+	  {
+	    criteria = "$workRight";
+	    status = "enable";
+	    position = "4480,-360";
+	  }
+	];
+      }
+    ];
   };
   nixGL.packages = nixGL.packages;
   nixGL.defaultWrapper = "mesa";
