@@ -13,6 +13,7 @@ synchronization between my machines.
   Debian-based systems are especially annoying and block localectl, there it's best to edit /etc/defaults/keyboard directly.
   - first run: `nix run --extra-experimental-features nix-command --extra-experimental-features flakes -- home-manager --extra-experimental-features nix-command --extra-experimental-features flakes switch --flake .#$USER`
   - all subsequent runs: `home-manager switch --flake .#$USER`
+  Swaylock requires pam configuration and is best installed via the system package manager.
   Other system-wide packages: udisks2
 * Contribution
   These are MY dotfiles.  I use this repository as a PERSONAL backup and for

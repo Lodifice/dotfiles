@@ -484,6 +484,7 @@
       stores = [ config.programs.password-store.settings.PASSWORD_STORE_DIR ];
     };
   };
+  programs.swaylock.package = null;
   programs.zathura = {
     enable = true;
     options = {
