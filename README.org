@@ -14,7 +14,8 @@ synchronization between my machines.
   - first run: `nix run --extra-experimental-features nix-command --extra-experimental-features flakes -- home-manager --extra-experimental-features nix-command --extra-experimental-features flakes switch --flake .#$USER`
   - all subsequent runs: `home-manager switch --flake .#$USER`
   Swaylock requires pam configuration and is best installed via the system package manager.
-  Other system-wide packages: udisks2
+  Other system-wide packages: bluez cups udisks2
+	everything that has bluetooth, pulse, pipewire, wireplumber, and alsa in its name, like srsly wtf!?
 * Contribution
   These are MY dotfiles.  I use this repository as a PERSONAL backup and for
   synchronization between MY machines.

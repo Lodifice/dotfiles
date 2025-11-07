@@ -50,6 +50,7 @@
     pkgs.brave
     pkgs.neofetch
     pkgs.gnumake
+    pkgs.mpv
 
     # work only packages
     pkgs.eduvpn-client
