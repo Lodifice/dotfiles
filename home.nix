@@ -863,6 +863,7 @@
       {
 	output.criteria = "Dell Inc. DELL U2715H GH85D7B225PS";
 	output.alias = "workLeft";
+	output.mode = "2048x1152@60Hz";
       }
       {
 	output.criteria = "Dell Inc. DELL U2415 7MT017AU09MS";
@@ -885,7 +886,7 @@
 	  {
 	    criteria = "$workRight";
 	    status = "enable";
-	    position = "4480,-360";
+	    position = "3968,-360";
 	  }
 	];
       }
