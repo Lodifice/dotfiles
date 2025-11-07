@@ -40,6 +40,9 @@
     pkgs.rxvt-unicode-unwrapped-emoji
     # I list Vim in this category although I still configure it via symlinks
     pkgs.vim
+    # And I list those two although I still configure them manually
+    pkgs.isync
+    pkgs.msmtp
 
     # fonts
     pkgs.nerd-fonts.fantasque-sans-mono
