@@ -23,8 +23,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    pkgs.toilet
-    pkgs.neofetch
+    # wayland
     (config.lib.nixGL.wrap pkgs.niri)
     pkgs.foot
     pkgs.xwayland-satellite
@@ -44,6 +43,11 @@
 
     # fonts
     pkgs.nerd-fonts.fantasque-sans-mono
+
+    # packages that don't need configuration
+    pkgs.brave
+    pkgs.neofetch
+    pkgs.gnumake
 
     # work only packages
     pkgs.eduvpn-client
