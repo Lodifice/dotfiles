@@ -31,6 +31,7 @@
     pkgs.libgbm
     pkgs.mesa
     pkgs.libdrm
+    pkgs.wl-clipboard	# for pass
 
     # packages with configuration files just copied by Home Manager
     # (at least for the time being)
@@ -461,13 +462,20 @@
       };
     };
   };
+  programs.password-store = {
+    enable = true;
+    settings = {
+      PASSWORD_STORE_DIR = "${config.xdg.dataHome}/password-store";
+    };
+  };
   programs.rofi = {
     enable = true;
     plugins = [ pkgs.rofi-calc ];
     modes = [ "window" "drun" "calc" ];
     pass = {
       enable = true;
-      stores = [ "${config.home.homeDirectory}/.password-store" ];
+      package = pkgs.rofi-pass-wayland;
+      stores = [ config.programs.password-store.settings.PASSWORD_STORE_DIR ];
     };
   };
   programs.zathura = {
@@ -829,12 +837,10 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    # TODO let Home Manager manage pinentry
-    # https://nix-community.github.io/home-manager/options.xhtml#opt-services.gpg-agent.pinentry.package
+    pinentry.package = pkgs.pinentry-all;
     extraConfig = ''
       allow-loopback-pinentry
-      pinentry-program /home/richard/.local/bin/pinentry-switch
-      '';
+    '';
   };
   nixGL.packages = nixGL.packages;
   nixGL.defaultWrapper = "mesa";
