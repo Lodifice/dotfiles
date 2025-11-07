@@ -43,6 +43,8 @@
 
     # fonts
     pkgs.nerd-fonts.fantasque-sans-mono
+    pkgs.noto-fonts
+    pkgs.fontconfig
 
     # packages that don't need configuration
     pkgs.brave
@@ -853,6 +855,7 @@
     enable = true;
     defaultFonts = {
       monospace = [ "FantasqueSansM Nerd Font:size=12" ];
+      sansSerif = [ "Noto Sans:style=Regular,size=12" ];
     };
     configFile.symbols = {
       enable = true;
