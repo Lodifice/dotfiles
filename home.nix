@@ -94,6 +94,9 @@
     "readline/inputrc".source = config/readline/inputrc;
     "tmux/tmux.conf".source = config/tmux/tmux.conf;
     "todoman/config.py".source = config/todoman/config.py;
+    # some xmodmap invoked by niri does not seach /usr/share/X11/xkb/,
+    # so we also add our variant for the local user
+    "xkb/symbols/my_gb".source = ./my_gb;
   };
 
   # Mime information
@@ -839,7 +842,7 @@
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
-      monospace = [ "Fantasque Sans Mono" ];
+      monospace = [ "FantasqueSansM Nerd Font:size=12" ];
     };
     configFile.symbols = {
       enable = true;
