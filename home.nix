@@ -31,6 +31,7 @@
     pkgs.mesa
     pkgs.libdrm
     pkgs.wl-clipboard	# for pass
+    pkgs.swaybg
 
     # packages with configuration files just copied by Home Manager
     # (at least for the time being)
@@ -53,6 +54,8 @@
     pkgs.brave
     pkgs.neofetch
     pkgs.gnumake
+    pkgs.libsixel
+    pkgs.lsix
     pkgs.mpv
 
     # work only packages
