@@ -346,13 +346,6 @@
       PROMPT_COMMAND="PostCommand"
 
       FZF_DEFAULT_OPTS="--layout=reverse"
-      . /usr/share/fzf/key-bindings.bash
-      for f in "$(systemd-path user-configuration)"/bash/?*.bash
-      do
-          [ -f "$f" ] && . "$f"
-      done
-      unset f
-      # wtf?
       bind -m vi-insert -x '"\C-t": fzf-file-widget'
 
       # https://github.com/4z3/fzf-plugins
@@ -420,6 +413,10 @@
         bind -m vi-insert '"\C-r": "\C-x\C-i\C-x\C-addi`__fzf_history__`\C-x\C-e\C-x\C-r\C-x^\C-x\C-a$a\C-x\C-o\C-x\C-p"'
       fi
       '';
+  };
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
   };
   programs.git = {
     enable = true;
