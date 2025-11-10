@@ -113,6 +113,10 @@
     "xkb/symbols/my_gb".source = ./my_gb;
   };
 
+  home.file = {
+    ".XCompose".source = ./XCompose;
+  };
+
   # Mime information
   xdg.mimeApps = {
     enable = true;

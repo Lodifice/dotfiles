@@ -11,7 +11,6 @@
 
 ## Xorg stuff that needs replacement
 
-- .XCompose
 - 00-keyboard.conf
 - my_gb
 
