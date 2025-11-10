@@ -34,8 +34,21 @@
     pkgs.swaybg
 
     # linux-desktop (default: no config)
+    pkgs.brave
+    pkgs.brightnessctl
     pkgs.chafa
     pkgs.ctpv # config copied
+    pkgs.libnotify
+    pkgs.libsixel
+    pkgs.lsix
+    pkgs.mpv
+    pkgs.neofetch
+
+    # development (no config)
+    pkgs.gcc
+    pkgs.gnumake
+
+
     # packages with configuration files just copied by Home Manager
     # (at least for the time being)
     pkgs.lf
@@ -52,14 +65,6 @@
     pkgs.nerd-fonts.fantasque-sans-mono
     pkgs.noto-fonts
     pkgs.fontconfig
-
-    # packages that don't need configuration
-    pkgs.brave
-    pkgs.neofetch
-    pkgs.gnumake
-    pkgs.libsixel
-    pkgs.lsix
-    pkgs.mpv
 
     # work only packages
     pkgs.eduvpn-client
