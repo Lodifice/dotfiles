@@ -33,6 +33,9 @@
     pkgs.wl-clipboard	# for pass
     pkgs.swaybg
 
+    # linux-desktop (default: no config)
+    pkgs.chafa
+    pkgs.ctpv # config copied
     # packages with configuration files just copied by Home Manager
     # (at least for the time being)
     pkgs.lf
@@ -99,6 +102,7 @@
 
   # Config files just copied by Home Manager
   xdg.configFile = {
+    "ctpv/config".source = config/ctpv/config;
     "latexmk/latexmkrc".source = config/latexmk/latexmkrc;
     "lf/lfrc".source = config/lf/lfrc;
     "mutt/bindings".source = config/mutt/bindings;

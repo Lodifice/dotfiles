@@ -56,7 +56,4 @@ map q %{{
 }}
 map Q quit
 
-set previewer stpv
-set cleaner stpvimgclr
-&stpvimg --listen $id
-cmd on-quit $stpvimg --end $id
+set previewer ctpv
