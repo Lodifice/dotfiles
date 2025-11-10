@@ -9,11 +9,6 @@
 - .vim/pack/notetaking/start/zettelkasten
 - .vim/vimrc
 
-## Xorg stuff that needs replacement
-
-- 00-keyboard.conf
-- my_gb
-
 ## Xorg stuff to delete without replacement
 
 - .Xresources
@@ -23,12 +18,13 @@
 - .stalonetrayrc
 - st-font-and-colors.diff
 - st-pkgbuild.diff
+- 00-keyboard.conf
 
 ## Untracked stuff
 
-- gpgsm.conf and all keys
-- muttrc, all accounts, aliases, filter
-- mbsync, msmtp
+- gpgsm.conf and all keys [c]
+- muttrc, all accounts, aliases, filter [c]
+- mbsync, msmtp [c]
 - Inhibit-Setup
 - Rest unter .config:
     - GOPATH=/home/richard/.local/share/go – geht das auch per Environment?
