@@ -39,15 +39,21 @@
     pkgs.chafa
     pkgs.ctpv # config copied
     pkgs.libnotify
+    pkgs.libreoffice
     pkgs.libsixel
     pkgs.lsix
     pkgs.mpv
     pkgs.neofetch
+    pkgs.util-linux
+    pkgs.w3m
+
+    # messengers (no config)
+    pkgs.telegram-desktop
 
     # development (no config)
     pkgs.gcc
     pkgs.gnumake
-
+    pkgs.jq
 
     # packages with configuration files just copied by Home Manager
     # (at least for the time being)
