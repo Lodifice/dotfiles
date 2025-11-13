@@ -237,6 +237,8 @@
       # Zettelkasten interaction
       zetk = "vim +Zettelkasten";
       nzet = "vim +NewZettel";
+      # workaround broken texlive in nixpkgs
+      tlmgr = "tlmgr --repository ctan";
     };
     initExtra = ''
       # stolen from http://stackoverflow.com/questions/1527049/join-elements-of-an-array
@@ -502,6 +504,10 @@
     };
   };
   programs.swaylock.package = null;
+  programs.texlive = {
+    enable = true;
+    extraPackages = tpkgs: { inherit (tpkgs) scheme-medium collection-fontsextra collection-latexextra; };
+  };
   programs.zathura = {
     enable = true;
     options = {
