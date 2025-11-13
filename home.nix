@@ -492,6 +492,7 @@
         autoupdate = true;
       };
     };
+    lfs.enable = true;
   };
   programs.password-store = {
     enable = true;
