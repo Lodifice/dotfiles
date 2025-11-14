@@ -6,10 +6,7 @@ color normal default default
 mono indicator reverse
 color prompt bold default default
 color search default default
-color status brightblack lightblue # ???
-color status bold reverse color103 default # autumn, not good
-color status bold reverse lightblue default # winter
-color status bold reverse lightgreen default # spring
+color status bold reverse lightwhite default
 
 # autumn, not good
 color hdrdefault color103 default
