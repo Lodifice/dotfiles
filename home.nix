@@ -34,7 +34,6 @@
     pkgs.swaybg
 
     # linux-desktop (default: no config)
-    pkgs.brave
     pkgs.brightnessctl
     pkgs.chafa
     pkgs.ctpv # config copied
@@ -441,6 +440,14 @@
         bind -m vi-insert '"\C-r": "\C-x\C-i\C-x\C-addi`__fzf_history__`\C-x\C-e\C-x\C-r\C-x^\C-x\C-a$a\C-x\C-o\C-x\C-p"'
       fi
       '';
+  };
+  programs.brave = {
+    enable = true;
+    extensions = [
+      { id = "hfjbmagddngcpeloejdejnfgbamkjaeg"; }  # Vimium C
+      { id = "lddjgfpjnifpeondafidennlcfagekbp"; }  # Downloads Overwrite Already Existing Files
+      { id = "dhdgffkkebhmkfjojejmpbldmpobfkfo"; }  # Tampermonkey
+    ];
   };
   programs.fzf = {
     enable = true;
