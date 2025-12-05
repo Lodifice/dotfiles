@@ -45,6 +45,7 @@
     pkgs.neofetch
     pkgs.util-linux
     pkgs.w3m
+    pkgs.xdg-utils
 
     # messengers (no config)
     pkgs.telegram-desktop
