@@ -1,4 +1,3 @@
-text/html; w3m -I %{charset} -T %t; copiousoutput;
 message/rfc822; view -Mf %s; edit=vim -f %s; compose=vim -f %s; needsterminal;
 application/pdf; mutt_bgrun zathura %s;
 application/msword; mutt_bgrun libreoffice %s;
@@ -6,4 +5,9 @@ application/vnd.oasis.opendocument.spreadsheet; mutt_bgrun libreoffice %s;
 application/vnd.oasis.opendocument.text; mutt_bgrun libreoffice %s;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; mutt_bgrun libreoffice %s;
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; mutt_bgrun libreoffice %s;
-image/*; mutt_bgrun sxiv %s;
+# TODO this works only in neomutt, but not in mutt
+image/*; chafa --polite on -c 240 -w 9 -s ${COLUMNS-80} -- %s; needsterminal;
+
+# TODO this displays images only in neomutt, but not in mutt
+text/html; w3m -sixel -o auto_image=TRUE -o display_image=1 -T %t %s; nametemplate=%s.html; needsterminal
+text/html; w3m -I %{charset} -T %t -cols ${COLUMNS-140} -o display_link_number=1 -dump; copiousoutput
