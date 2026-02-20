@@ -24,7 +24,6 @@
   # environment.
   home.packages = [
     # wayland
-    (config.lib.nixGL.wrap pkgs.niri)
     pkgs.xwayland-satellite
     pkgs.libgbm
     pkgs.mesa
@@ -58,6 +57,7 @@
     # (at least for the time being)
     pkgs.lf
     pkgs.mutt
+    (config.lib.nixGL.wrap pkgs.niri)
     pkgs.todoman
     pkgs.rxvt-unicode-unwrapped-emoji
     # I list Vim in this category although I still configure it via symlinks
@@ -119,6 +119,7 @@
     "mutt/colors.transparent".source = config/mutt/colors.transparent;
     "mutt/mailcap".source = config/mutt/mailcap;
     "mutt/muttlisp".source = config/mutt/muttlisp;
+    "niri/config.kdl".source = config/niri/config.kdl;
     "readline/inputrc".source = config/readline/inputrc;
     "tmux/tmux.conf".source = config/tmux/tmux.conf;
     "todoman/config.py".source = config/todoman/config.py;
