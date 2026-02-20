@@ -25,7 +25,6 @@
   home.packages = [
     # wayland
     (config.lib.nixGL.wrap pkgs.niri)
-    pkgs.foot
     pkgs.xwayland-satellite
     pkgs.libgbm
     pkgs.mesa
@@ -449,6 +448,41 @@
       { id = "lddjgfpjnifpeondafidennlcfagekbp"; }  # Downloads Overwrite Already Existing Files
       { id = "dhdgffkkebhmkfjojejmpbldmpobfkfo"; }  # Tampermonkey
     ];
+  };
+  programs.foot = {
+    enable = true;
+    settings = {
+      main = {
+        font = "FantasqueSansM Nerd Font:size=12";
+        pad = "2x2 center";
+      };
+      colors = {
+        regular0 = "51576d";
+        regular1 = "e78284";
+        regular2 = "a6d189";
+        regular3 = "e5c890";
+        regular4 = "8caaee";
+        regular5 = "f4b8e4";
+        regular6 = "81c8be";
+        regular7 = "a5adce";
+
+        bright0 = "626880";
+        bright1 = "e67172";
+        bright2 = "8ec772";
+        bright3 = "d9ba73";
+        bright4 = "7b9ef0";
+        bright5 = "f2a4db";
+        bright6 = "5abfb5";
+        bright7 = "b5bfe2";
+
+        "16" = "ef9f76";
+        "17" = "f2d5cf";
+
+        background = "181926";
+
+        alpha = 0.8;
+      };
+    };
   };
   programs.fzf = {
     enable = true;
