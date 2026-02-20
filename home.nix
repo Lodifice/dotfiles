@@ -919,9 +919,11 @@
       }
     ];
   };
-  nixGL.packages = nixGL.packages;
-  nixGL.defaultWrapper = "mesa";
-  nixGL.installScripts = [ "mesa" ];
+  targets.genericLinux.nixGL = {
+    packages = nixGL.packages;
+    defaultWrapper = "mesa";
+    installScripts = [ "mesa" ];
+  };
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
