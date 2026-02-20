@@ -41,6 +41,8 @@
     pkgs.lsix
     pkgs.mpv
     pkgs.neofetch
+    pkgs.signal-desktop
+    pkgs.tmux
     pkgs.util-linux
     pkgs.w3m
     pkgs.xdg-utils
